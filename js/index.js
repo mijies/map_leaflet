@@ -1,16 +1,17 @@
 
-const map = L.map('mapid').setView([INIT_LONGITUDE, INIT_LATITUDE], INIT_ZOOM_LEVEL);
 
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+
+const map = L.map('mapid', {
+    // Map State Options
+    center: [INIT_LONGITUDE, INIT_LATITUDE],
+    maxBounds: setLatLngBounds(),
     maxZoom: INIT_ZOOM_MAX,
     minZoom: INIT_ZOOM_MIN,
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1
-}).addTo(map);
+    zoom: INIT_ZOOM_LEVEL,
+    layers: TileLayersList,
+    // Interaction Options
+    bounceAtZoomLimits: false
+});
 
 loadJSON('data/nurseryFacilities.geojson', (response) => {
     nurseryFacilities = JSON.parse(response);
@@ -20,6 +21,8 @@ loadJSON('data/nurseryFacilities.geojson', (response) => {
             }
         }).addTo(map);
 });
+
+L.control.layers(TileLayersMaps).addTo(map);
 
 
 

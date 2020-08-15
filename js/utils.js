@@ -9,4 +9,4 @@ const loadJSON = (data_path, callback) => {
         }
     };
     xobj.send(null);
-}
+};
