@@ -15,3 +15,14 @@ const INIT_ZOOM_MIN = 10;
 const INIT_ZOOM_LEVEL = 13;
 
 let nurseryFacilities;
+
+const NurseryIconClass = {
+    "公立認可保育所": "pubninka-div-icon",
+    "横浜保育室": "yhoiku-div-icon",
+    "幼稚園": "kindergarten-div-icon",
+    "認可外保育施設": "ninkagai-div-icon",
+    "小規模・事業所内保育事業": "jigyosho-div-icon",
+    "学童保育": "gakudou-div-icon",
+    "私立認可保育所": "prininka-div-icon",
+    "障害児通所支援事業": "disability-div-icon"
+}

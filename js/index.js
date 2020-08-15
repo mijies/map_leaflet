@@ -16,16 +16,7 @@ const map = L.map('mapid', {
 loadJSON('data/nurseryFacilities.geojson', (response) => {
     nurseryFacilities = JSON.parse(response);
     L.geoJSON(nurseryFacilities, {
-            pointToLayer: function (feature, coordinates) {
-                 return L.marker(coordinates, {icon:
-                    L.icon({
-                        iconUrl: "images/018.png",
-                        iconSize: [20, 20],
-                        shadowSize: [22, 22],
-                        className: "nusrsery-div-icon"
-                        // html: '<div class="nusrsery-div-icon"></div>'
-                    })
-            })},
+            pointToLayer: nurseryStyleFunction,
             onEachFeature: function(feature, layer){
                 layer.bindPopup(feature.properties.Name);
             }

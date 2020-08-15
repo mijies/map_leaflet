@@ -7,10 +7,59 @@ html, body, #mapid {
     width: 100vw;
 }
 
+/* 保育園施設アイコン */
 .nusrsery-div-icon {
     padding: 10;
     border: 1px solid white;
     border-radius: 50%;
-    background-color: red;
-    /* background-color: azure; */
 }
+
+.pubninka-div-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: green;
+}
+.yhoiku-div-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: dodgerblue;
+}
+.kindergarten-div-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: red;
+}
+.ninkagai-div-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: mediumblue;
+}
+.jigyosho-div-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: mediumpurple;
+}
+.gakudou-div-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: darkgoldenrod;
+}
+.prininka-div-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: greenyellow;
+}
+.disability-div-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: salmon;
+}
+

@@ -28,6 +28,7 @@ const TileLayersObjs = {
 };
 
 
+
 // class Map {
 //     constructor (mapServerList) {
 //         this.mapServerList = mapServerList;
