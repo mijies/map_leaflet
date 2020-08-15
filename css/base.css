@@ -6,3 +6,11 @@ html, body, #mapid {
     height: 100%;
     width: 100vw;
 }
+
+.nusrsery-div-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: red;
+    /* background-color: azure; */
+}

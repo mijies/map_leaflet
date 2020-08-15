@@ -8,7 +8,7 @@ const map = L.map('mapid', {
     maxZoom: INIT_ZOOM_MAX,
     minZoom: INIT_ZOOM_MIN,
     zoom: INIT_ZOOM_LEVEL,
-    layers: TileLayersList,
+    layers: BingLayer,
     // Interaction Options
     bounceAtZoomLimits: false
 });
@@ -16,13 +16,23 @@ const map = L.map('mapid', {
 loadJSON('data/nurseryFacilities.geojson', (response) => {
     nurseryFacilities = JSON.parse(response);
     L.geoJSON(nurseryFacilities, {
+            pointToLayer: function (feature, coordinates) {
+                 return L.marker(coordinates, {icon:
+                    L.icon({
+                        iconUrl: "images/018.png",
+                        iconSize: [20, 20],
+                        shadowSize: [22, 22],
+                        className: "nusrsery-div-icon"
+                        // html: '<div class="nusrsery-div-icon"></div>'
+                    })
+            })},
             onEachFeature: function(feature, layer){
                 layer.bindPopup(feature.properties.Name);
             }
         }).addTo(map);
 });
 
-L.control.layers(TileLayersMaps).addTo(map);
+L.control.layers(TileLayersObjs).addTo(map);
 
 
 
