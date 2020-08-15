@@ -16,13 +16,37 @@ const INIT_ZOOM_LEVEL = 13;
 
 let nurseryFacilities;
 
-const NurseryIconClass = {
-    "公立認可保育所": "pubninka-div-icon",
-    "横浜保育室": "yhoiku-div-icon",
-    "幼稚園": "kindergarten-div-icon",
-    "認可外保育施設": "ninkagai-div-icon",
-    "小規模・事業所内保育事業": "jigyosho-div-icon",
-    "学童保育": "gakudou-div-icon",
-    "私立認可保育所": "prininka-div-icon",
-    "障害児通所支援事業": "disability-div-icon"
+const NurseryIconStyle = {
+    "公立認可保育所": {
+        "zIndexOffset": 800,
+        "className":"pubninka-div-icon"
+    },
+    "横浜保育室": {
+        "zIndexOffset": 700,
+        "className": "yhoiku-div-icon"
+    },   
+    "幼稚園": {
+        "zIndexOffset": 600,
+        "className": "kindergarten-div-icon"
+    },
+    "認可外保育施設": {
+        "zIndexOffset": 500,
+        "className": "ninkagai-div-icon"
+    },
+    "小規模・事業所内保育事業": {
+        "zIndexOffset": 400,
+        "className": "jigyosho-div-icon"
+    },
+    "学童保育": {
+        "zIndexOffset": 300,
+        "className": "gakudou-div-icon"
+    },
+    "私立認可保育所": {
+        "zIndexOffset": 200,
+        "className": "prininka-div-icon"
+    },
+    "障害児通所支援事業": {
+        "zIndexOffset": 100,
+        "className": "disability-div-icon"
+    }
 }
