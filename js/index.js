@@ -14,13 +14,8 @@ const map = L.map('mapid', {
 });
 
 loadJSON('data/nurseryFacilities.geojson', (response) => {
-    nurseryFacilities = JSON.parse(response);
-    L.geoJSON(nurseryFacilities, {
-            pointToLayer: nurseryStyleFunction,
-            onEachFeature: function(feature, layer){
-                layer.bindPopup(feature.properties.Name);
-            }
-        }).addTo(map);
+    Nursery_Facilities = JSON.parse(response);
+    AddNurseryLayers(Nursery_Facilities);
 });
 
 L.control.layers(TileLayersObjs).addTo(map);

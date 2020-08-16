@@ -26,8 +26,7 @@ const TileLayersObjs = {
     "<span style='color: gray'>Bing</span>": BingLayer,
     "<span style='color: gray'>OSM</span>": OSMLayer
 };
-
-
+    
 
 // class Map {
 //     constructor (mapServerList) {

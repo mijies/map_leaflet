@@ -14,9 +14,13 @@ const INIT_ZOOM_MAX = 18;
 const INIT_ZOOM_MIN = 10;
 const INIT_ZOOM_LEVEL = 13;
 
-let nurseryFacilities;
+let Nursery_Facilities;
 
-const NurseryIconStyle = {
+const NURSERY_LAYERS = {
+
+}
+
+const NURSERY_STYLES = {
     "公立認可保育所": {
         "zIndexOffset": 800,
         "className":"pubninka-div-icon"
