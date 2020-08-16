@@ -23,34 +23,34 @@ const NURSERY_LAYERS = {
 const NURSERY_STYLES = {
     "公立認可保育所": {
         "zIndexOffset": 800,
-        "className":"pubninka-div-icon"
+        "className":"pubninka-icon"
     },
     "横浜保育室": {
         "zIndexOffset": 700,
-        "className": "yhoiku-div-icon"
+        "className": "yhoiku-icon"
     },   
     "幼稚園": {
         "zIndexOffset": 600,
-        "className": "kindergarten-div-icon"
+        "className": "kindergarten-icon"
     },
     "認可外保育施設": {
         "zIndexOffset": 500,
-        "className": "ninkagai-div-icon"
+        "className": "ninkagai-icon"
     },
     "小規模・事業所内保育事業": {
         "zIndexOffset": 400,
-        "className": "jigyosho-div-icon"
+        "className": "jigyosho-icon"
     },
     "学童保育": {
         "zIndexOffset": 300,
-        "className": "gakudou-div-icon"
+        "className": "gakudou-icon"
     },
     "私立認可保育所": {
         "zIndexOffset": 200,
-        "className": "prininka-div-icon"
+        "className": "prininka-icon"
     },
     "障害児通所支援事業": {
         "zIndexOffset": 100,
-        "className": "disability-div-icon"
+        "className": "disability-icon"
     }
 }

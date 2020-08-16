@@ -30,7 +30,16 @@ const nurseryStyleFunction = (type) => {
 }};
 
 const nurseryOnEachFeature = (feature, layer) => {
-    layer.bindPopup(getNurseryPopupHtml(feature));
+    layer.bindPopup(
+        getNurseryPopupHtml(feature),
+        getNurseryPopupOptions()
+    );
+};
+
+const getNurseryPopupOptions = () => {
+    return {
+        'maxWidth': '500'
+    };
 };
 
 const getNurseryPopupHtml = (feature) => {
@@ -123,5 +132,3 @@ const getNurseryPopupHtml = (feature) => {
     return txt + table.done();
 };
 
-
-// className: `nusrsery-div-icon ${NurseryIconClass[feature.properties.Type]}`

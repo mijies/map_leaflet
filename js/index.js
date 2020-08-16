@@ -1,6 +1,4 @@
 
-
-
 const map = L.map('mapid', {
     // Map State Options
     center: [INIT_LONGITUDE, INIT_LATITUDE],
@@ -18,6 +16,7 @@ loadJSON('data/nurseryFacilities.geojson', (response) => {
     AddNurseryLayers(Nursery_Facilities);
 });
 
+L.control.scale({'imperial': false}).addTo(map);
 L.control.layers(TileLayersObjs).addTo(map);
 
 
