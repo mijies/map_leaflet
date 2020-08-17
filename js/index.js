@@ -26,7 +26,7 @@ Array.from(document.getElementsByClassName('layer-btn')).forEach(btn => {
     btn.addEventListener('click', e => {
         if (btn.on) {
             map.removeLayer(NURSERY_LAYERS[btn.id]);
-            btn.style = "color: black; background-color: rgba(240,240,240,0.8)";
+            btn.style = "color: grey; background-color: rgba(240,240,240,0.8)";
             btn.on = false;
             return;
         }
@@ -36,13 +36,13 @@ Array.from(document.getElementsByClassName('layer-btn')).forEach(btn => {
     });
     btn.addEventListener('mouseenter', _ => {
         if (!btn.on) {
-            btn.style = "color: lightblue; background-color: rgba(240,240,240,0.8)";
+            btn.style = "color: lightblue; background-color: rgba(240,240,240,0.8);border: groove white;";
             return;
         }
     });
     btn.addEventListener('mouseleave', _ => {
         if (!btn.on) {
-            btn.style = "color: black; background-color: rgba(240,240,240,0.8)";
+            btn.style = "color: grey; background-color: rgba(240,240,240,0.8);";
             return;
         }
     });

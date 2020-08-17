@@ -19,34 +19,41 @@ html, body, #mapid {
     margin: 0;
 } */
 
-#menu {
+#menu-div {
 	position: fixed;
     top:0; left: 50px;
     z-index: 2;
     padding: 0;
     margin: 0;
 }
-
 #menu-ul, .menu-li {
     padding: 0;
     margin: 0;
+    letter-spacing: -0.5em;
+}
+.menu-li {
+    display: inline-block;
 }
 
-/* #nav1-btn {
-	background-color: white;
+.btn-div {
+    margin: 10;
+    font-size:0;
 }
-#nav1-btn:hover {
-	background-color: #e0e0e0;
-} */
 
 .layer-btn {
     color: white;
 	border: groove white;
     border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    padding: 5px 8px 5px 8px;
+    margin: 0;
 }
 .layer-btn:hover {
 	color: lightblue;
 }
+.layer-btn:focus {
+	outline: none;
+}
+
 
 #btnPubNinka {
 	background-color: green;
