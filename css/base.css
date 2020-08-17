@@ -7,6 +7,81 @@ html, body, #mapid {
     width: 100vw;
 }
 
+#mapid {
+    z-index: 1;
+}
+
+/* #nav1-btn-div {
+	position: fixed;
+    top:0;
+    right:20px;
+	padding: 0;
+    margin: 0;
+} */
+
+#menu {
+	position: fixed;
+    top:0; left: 50px;
+    z-index: 2;
+    padding: 0;
+    margin: 0;
+}
+
+#menu-ul, .menu-li {
+    padding: 0;
+    margin: 0;
+}
+
+/* #nav1-btn {
+	background-color: white;
+}
+#nav1-btn:hover {
+	background-color: #e0e0e0;
+} */
+
+.layer-btn {
+    color: white;
+	border: groove white;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+}
+.layer-btn:hover {
+	color: lightblue;
+}
+
+#btnPubNinka {
+	background-color: green;
+}
+
+#btnPriNinka {
+	background-color: greenyellow;
+}
+
+#btnJigyosho {
+	background-color: mediumpurple;
+}
+
+#btnYhoiku {
+	background-color: dodgerblue;
+}
+
+#btnNinkagai {
+	background-color: mediumblue;
+}
+
+#btnDisability {
+	background-color: salmon;
+}
+
+#btnGakudou {
+	background-color: darkgoldenrod;
+}
+
+#btnKindergarten {
+	background-color: red;
+}
+
+
+
 /* 保育園施設アイコン */
 .pubninka-icon {
     padding: 10;

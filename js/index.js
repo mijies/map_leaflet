@@ -11,15 +11,41 @@ const map = L.map('mapid', {
     bounceAtZoomLimits: false
 });
 
-loadJSON('data/nurseryFacilities.geojson', (response) => {
+loadJSON('data/nurseryFacilities.geojson', response => {
     Nursery_Facilities = JSON.parse(response);
     AddNurseryLayers(Nursery_Facilities);
 });
 
 L.control.scale({'imperial': false}).addTo(map);
 L.control.layers(TileLayersObjs).addTo(map);
+// map.removeControl();
 
-
+Array.from(document.getElementsByClassName('layer-btn')).forEach(btn => {
+    btn.on = true;
+    btn.addEventListener('click', e => {
+        if (btn.on) {
+            map.removeLayer(NURSERY_LAYERS[btn.id]);
+            btn.style = "color: black; background-color: rgba(240,240,240,0.8)";
+            btn.on = false;
+            return;
+        }
+        map.addLayer(NURSERY_LAYERS[btn.id]);
+        btn.style = "";
+        btn.on = true;
+    });
+    btn.addEventListener('mouseenter', e => {
+        if (!btn.on) {
+            btn.style = "color: lightblue; background-color: rgba(240,240,240,0.8)";
+            return;
+        }
+    });
+    btn.addEventListener('mouseleave', e => {
+        if (!btn.on) {
+            btn.style = "color: black; background-color: rgba(240,240,240,0.8)";
+            return;
+        }
+    });
+});
 
 // function onLocationFound(e) {
 //     var radius = e.accuracy;

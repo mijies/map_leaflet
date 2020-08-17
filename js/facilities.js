@@ -3,8 +3,10 @@
 // TODO: Create Marker Object directly should be faster
 const AddNurseryLayers = (geoJSON) => {
     // layers for each facility type
-    Object.keys(NURSERY_STYLES).forEach((type) => {
-        const a = L.geoJSON(Nursery_Facilities, getGeoJSONOptions(type)).addTo(map);
+    Object.keys(NURSERY_ICONS).forEach(type => {
+        const layers = L.geoJSON(Nursery_Facilities, getGeoJSONOptions(type));
+        NURSERY_LAYERS[NURSERY_ICONS[type].btn_id] = layers;
+        layers.addTo(map);
     });
 }
 
@@ -17,7 +19,7 @@ const getGeoJSONOptions = (type) => {
 };
 
 const nurseryStyleFunction = (type) => {
-    const style = NURSERY_STYLES[type]
+    const style = NURSERY_ICONS[type]
     return (feature, coordinates) => {
         return L.marker(coordinates, {
             icon: L.icon({

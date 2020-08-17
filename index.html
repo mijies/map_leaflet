@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-	
-	<title>港北区保育園マップ by CodeForKohoku</title>
-
     <meta charset="utf-8" />
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>港北区保育園マップ by Codefor港北</title>
 	
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
     <link rel="stylesheet" href="css/base.css" type="text/css">
@@ -14,7 +12,27 @@
     <script src="js/Bing.js"></script> 
 </head>
 <body>
-    <div id='mapid'></div>
+    <div id='mapid'>
+    </div>
+    <!-- <div id="nav1-btn-div">
+        <button type="button" id="nav1-btn" data-mini="true">
+            <img src="images/bars-black.svg" alt="menu">
+        </button>
+        </div> -->
+    <div id="menu">
+        <ul id="menu-ul">
+            <li class="menu-li" style="display: inline-block;">
+                <button type="button" class="layer-btn" id="btnPubNinka"><b>公立認可</b></button>
+                <button type="button" class="layer-btn" id="btnPriNinka"><b>私立認可</b></button>
+                <button type="button" class="layer-btn" id="btnJigyosho"><b>小規模等</b></button>
+                <button type="button" class="layer-btn" id="btnYhoiku"><b>横浜保育室</b></button>
+                <button type="button" class="layer-btn" id="btnNinkagai"><b>認可外</b></button>
+                <button type="button" class="layer-btn" id="btnDisability"><b>障害児通所支援</b></button>
+                <button type="button" class="layer-btn" id="btnGakudou"><b>学童保育</b></button>
+                <button type="button" class="layer-btn" id="btnKindergarten"><b>幼</b></button>
+            </li>
+        </ul>
+    </div>
     <script src="js/settings.js" type="text/javascript"></script>
     <script src="js/utils.js" type="text/javascript"></script>
     <script src="js/map.js" type="text/javascript"></script>
