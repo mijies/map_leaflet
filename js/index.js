@@ -13,11 +13,12 @@ const map = L.map('mapid', {
 
 loadJSON('data/nurseryFacilities.geojson', response => {
     Nursery_Facilities = JSON.parse(response);
-    AddNurseryLayers(Nursery_Facilities);
+    AddNurseryLayers(Nursery_Facilities, map);
 });
 
 L.control.scale({'imperial': false}).addTo(map);
-L.control.layers(TileLayersObjs).addTo(map);
+L.control.locate({"keepCurrentZoomLevel": true}).addTo(map);
+// L.control.layers(TileLayersObjs).addTo(map);
 // map.removeControl();
 
 Array.from(document.getElementsByClassName('layer-btn')).forEach(btn => {
@@ -33,19 +34,30 @@ Array.from(document.getElementsByClassName('layer-btn')).forEach(btn => {
         btn.style = "";
         btn.on = true;
     });
-    btn.addEventListener('mouseenter', e => {
+    btn.addEventListener('mouseenter', _ => {
         if (!btn.on) {
             btn.style = "color: lightblue; background-color: rgba(240,240,240,0.8)";
             return;
         }
     });
-    btn.addEventListener('mouseleave', e => {
+    btn.addEventListener('mouseleave', _ => {
         if (!btn.on) {
             btn.style = "color: black; background-color: rgba(240,240,240,0.8)";
             return;
         }
     });
 });
+
+// map.on('locationfound', e => {
+//     const [lat, lng] = [e.latlng.lat, e.latlng.lng];
+//     if (lat > SOUTH_BOUND && lat < NORTH_BOUND && lng > WEST_BOUND && lng < EAST_BOUND) {
+//         map.setView(e.latlng);
+//     }
+// });
+
+// map.on('locationerror', e => alert(e.message));
+
+// map.locate();
 
 // function onLocationFound(e) {
 //     var radius = e.accuracy;

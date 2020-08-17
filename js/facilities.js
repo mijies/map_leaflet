@@ -1,12 +1,11 @@
 
 
-// TODO: Create Marker Object directly should be faster
-const AddNurseryLayers = (geoJSON) => {
+// TODO: Create Marker Object directly could be faster
+const AddNurseryLayers = (geoJSON, map) => {
     // layers for each facility type
     Object.keys(NURSERY_ICONS).forEach(type => {
-        const layers = L.geoJSON(Nursery_Facilities, getGeoJSONOptions(type));
-        NURSERY_LAYERS[NURSERY_ICONS[type].btn_id] = layers;
-        layers.addTo(map);
+        NURSERY_LAYERS[NURSERY_ICONS[type].btn_id] = L.geoJSON(
+            Nursery_Facilities, getGeoJSONOptions(type)).addTo(map);
     });
 }
 
