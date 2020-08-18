@@ -15,6 +15,10 @@ const INIT_ZOOM_MIN = 10;
 const INIT_ZOOM_LEVEL = 13;
 
 let Nursery_Facilities;
+const SCHOOL_LAYERS = {
+    "btnElementarySchool": null,
+    "btnMiddleSchool": null    // L.layerGroup([MiddleSchool, MiddleSchool_loc])
+};
 
 const NURSERY_LAYERS = {
     "btnPubNinka": [],

@@ -1,13 +1,39 @@
 
+loadNurseryFacilities = (map) => {
+    loadJSON('data/nurseryFacilities.geojson', response => {
+        Nursery_Facilities = JSON.parse(response);
+        AddNurseryLayers(Nursery_Facilities, map);
+    });
+};
 
 // TODO: Create Marker Object directly could be faster
-const AddNurseryLayers = (geoJSON, map) => {
+const AddNurseryLayers = (Nursery_Facilities, map) => {
     // layers for each facility type
     Object.keys(NURSERY_ICONS).forEach(type => {
         NURSERY_LAYERS[NURSERY_ICONS[type].btn_id] = L.geoJSON(
             Nursery_Facilities, getGeoJSONOptions(type)).addTo(map);
     });
 }
+
+loadSchools = (map) => {
+    const elementary = [];
+    loadJSON('data/Elementary_loc.geojson', response => {
+        loadJSON('data/Elementary.geojson', response => {
+            elementary.push(L.geoJSON(JSON.parse(response)));
+            SCHOOL_LAYERS["btnElementarySchool"] = L.layerGroup(elementary);
+        });
+        elementary.push(L.geoJSON(JSON.parse(response)));
+    });
+
+    const middle = [];
+    loadJSON('data/MiddleSchool_loc.geojson', response => {
+        loadJSON('data/MiddleSchool.geojson', response => {
+            middle.push(L.geoJSON(JSON.parse(response)));
+            SCHOOL_LAYERS["btnMiddleSchool"] = L.layerGroup(middle);
+        });
+        middle.push(L.geoJSON(JSON.parse(response)));
+    });
+};
 
 const getGeoJSONOptions = (type) => {
     return {

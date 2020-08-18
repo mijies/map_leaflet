@@ -24,7 +24,7 @@
         </div> -->
     <div id="menu-div">
         <ul id="menu-ul">
-            <li class="menu-li">
+            <li class="menu-layer-li">
                 <button type="button" class="layer-btn" id="btnPubNinka"><b>公立認可</b></button>
                 <button type="button" class="layer-btn" id="btnPriNinka"><b>私立認可</b></button>
                 <button type="button" class="layer-btn" id="btnJigyosho"><b>小規模等</b></button>
@@ -33,6 +33,27 @@
                 <button type="button" class="layer-btn" id="btnDisability"><b>障害児通所支援</b></button>
                 <button type="button" class="layer-btn" id="btnGakudou"><b>学童保育</b></button>
                 <button type="button" class="layer-btn" id="btnKindergarten"><b>幼</b></button>
+                <button type="button" class="layer-btn-school" id="btnElementarySchool"><b>小</b></button>
+                <button type="button" class="layer-btn-school" id="btnMiddleSchool"><b>中</b></button>
+            </li>
+            <li class="menu-control-li">
+                <button type="button" class="control-btn" id="btnFilter">
+                    <b>検索 </b><img width="10" height="10" src="images/filter-black.png">
+                </button>
+                <button type="button" class="control-btn" id="btnNewSchool">
+                    <b>新設園 </b><img width="10" height="10" src="images/filter-black.png">
+                </button>
+                <select id="changeBaseMap">
+                    <option>背景</option>
+                </select>
+                <select id="moveTo">
+                    <option>最寄駅</option>
+                </select>
+                
+                <button type="button" class="control-btn" id="btnHelp">
+                    <img width="15" height="15" src="images/question-circle.png">
+                </button>
+                
             </li>
         </ul>
     </div>

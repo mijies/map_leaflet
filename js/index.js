@@ -11,10 +11,9 @@ const map = L.map('mapid', {
     bounceAtZoomLimits: false
 });
 
-loadJSON('data/nurseryFacilities.geojson', response => {
-    Nursery_Facilities = JSON.parse(response);
-    AddNurseryLayers(Nursery_Facilities, map);
-});
+loadNurseryFacilities(map);
+loadSchools(map);
+
 
 L.control.scale({'imperial': false}).addTo(map);
 L.control.locate({"keepCurrentZoomLevel": true}).addTo(map);
@@ -34,18 +33,41 @@ Array.from(document.getElementsByClassName('layer-btn')).forEach(btn => {
         btn.style = "";
         btn.on = true;
     });
+    /* clickイベントのstyle書き換えでcssのhover無効への対処 */
     btn.addEventListener('mouseenter', _ => {
-        if (!btn.on) {
-            btn.style = "color: lightblue; background-color: rgba(240,240,240,0.8);border: groove white;";
-            return;
-        }
+        if (!btn.on) btn.style = "color: lightblue; background-color: rgba(240,240,240,0.8);border: groove white;";
     });
     btn.addEventListener('mouseleave', _ => {
-        if (!btn.on) {
-            btn.style = "color: grey; background-color: rgba(240,240,240,0.8);";
+        if (!btn.on) btn.style = "color: grey; background-color: rgba(240,240,240,0.8);";
+    });
+});
+
+// TODO: should be excuted in async
+Array.from(document.getElementsByClassName('layer-btn-school')).forEach(btn => {
+    btn.style = "color: grey; background-color: rgba(240,240,240,0.8)";
+    btn.on = false;
+    btn.addEventListener('click', _ => {
+        if (btn.on) {
+            map.removeLayer(SCHOOL_LAYERS[btn.id]);
+            btn.style = "color: grey; background-color: rgba(240,240,240,0.8)";
+            btn.on = false;
             return;
         }
+        map.addLayer(SCHOOL_LAYERS[btn.id]);
+        btn.style = "";
+        btn.on = true;
     });
+    /* clickイベントのstyle書き換えでcssのhover無効への対処 */
+    btn.addEventListener('mouseenter', _ => {
+        if (!btn.on) btn.style = "color: lightblue; background-color: rgba(240,240,240,0.8);border: groove white;";
+    });
+    btn.addEventListener('mouseleave', _ => {
+        if (!btn.on) btn.style = "color: grey; background-color: rgba(240,240,240,0.8);";
+    });
+});
+
+document.getElementById('btnHelp').addEventListener('click', _ => {
+    window.open('howto.html');
 });
 
 // map.on('locationfound', e => {

@@ -26,12 +26,12 @@ html, body, #mapid {
     padding: 0;
     margin: 0;
 }
-#menu-ul, .menu-li {
+#menu-ul, .menu-layer-li {
     padding: 0;
     margin: 0;
     letter-spacing: -0.5em;
 }
-.menu-li {
+.menu-layer-li {
     display: inline-block;
 }
 
@@ -40,7 +40,7 @@ html, body, #mapid {
     font-size:0;
 }
 
-.layer-btn {
+.layer-btn, .layer-btn-school, .control-btn {
     color: white;
 	border: groove white;
     border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
@@ -50,10 +50,16 @@ html, body, #mapid {
 .layer-btn:hover {
 	color: lightblue;
 }
-.layer-btn:focus {
+.layer-btn:focus, .layer-btn-school:focus, .control-btn:focus {
 	outline: none;
 }
 
+.control-btn {
+    color: black;
+}
+.control-btn:hover {
+    background-color: rgba(224,255,255,0.8);
+}
 
 #btnPubNinka {
 	background-color: green;
@@ -85,6 +91,13 @@ html, body, #mapid {
 
 #btnKindergarten {
 	background-color: red;
+}
+
+#btnElementarySchool {
+	background-color: green;
+}
+#btnMiddleSchool {
+	background-color: grey;
 }
 
 
@@ -138,7 +151,3 @@ html, body, #mapid {
     border-radius: 50%;
     background-color: salmon;
 }
-
-/* 保育園施設ポップアップ */
-.nursery-popup
-
