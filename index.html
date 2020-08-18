@@ -40,15 +40,22 @@
                 <button type="button" class="control-btn" id="btnFilter">
                     <b>検索 </b><img width="10" height="10" src="images/filter-black.png">
                 </button>
+
                 <button type="button" class="control-btn" id="btnNewSchool">
                     <b>新設園 </b><img width="10" height="10" src="images/filter-black.png">
                 </button>
-                <select id="changeBaseMap">
-                    <option>背景</option>
-                </select>
-                <select id="moveTo">
-                    <option>最寄駅</option>
-                </select>
+
+                <button type="button" class="control-btn control-btn-select">
+                    <select class="control-select" id="selectBaseMap">
+                        <option selected hidden>背景</option>
+                    </select>
+                </button>
+
+                <button type="button" class="control-btn control-btn-select">
+                    <select class="control-select" id="selectStation">
+                        <option selected hidden>最寄駅</option>
+                    </select>
+                </button>
                 
                 <button type="button" class="control-btn" id="btnHelp">
                     <img width="15" height="15" src="images/question-circle.png">
