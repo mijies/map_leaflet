@@ -10,3 +10,13 @@ const loadJSON = (data_path, callback) => {
     };
     xobj.send(null);
 };
+
+const addSelectBoxOptions = (id, optList) => {
+    const select = document.getElementById(id);
+    optList.forEach(opt => {
+        const option = document.createElement("option");
+        if (opt.value) option.value = opt.value;
+        if (opt.text) option.text = opt.text;
+        select.appendChild(option);
+    });
+};

@@ -50,7 +50,7 @@ html, body, #mapid {
 .layer-btn:hover {
 	color: lightblue;
 }
-.layer-btn:focus, .layer-btn-school:focus, .control-btn:focus {
+.layer-btn:focus, .layer-btn-school:focus, .control-btn:focus, .control-select:focus {
 	outline: none;
 }
 
@@ -68,7 +68,7 @@ html, body, #mapid {
     border :1px solid #eee;
     font-size :14px;
     font-weight: bold;
-    padding-bottom: 4px;
+    padding-bottom: 3px;
     background-color: rgba(255,255,255,0.0);
 }
 

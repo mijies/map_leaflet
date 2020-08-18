@@ -6,7 +6,7 @@ const map = L.map('mapid', {
     maxZoom: INIT_ZOOM_MAX,
     minZoom: INIT_ZOOM_MIN,
     zoom: INIT_ZOOM_LEVEL,
-    layers: BingLayer,
+    layers: BaseMapDict[INIT_MAP],
     // Interaction Options
     bounceAtZoomLimits: false
 });
@@ -66,9 +66,27 @@ Array.from(document.getElementsByClassName('layer-btn-school')).forEach(btn => {
     });
 });
 
+
+addSelectBoxOptions('selectBaseMap', Object.keys(BaseMapDict).map(key => {
+    return {'value': key, 'text': key};
+}));
+
+ 
+document.getElementById('selectBaseMap').addEventListener('change', e => {
+    Object.keys(BaseMapDict).forEach(key => {
+        if (map.hasLayer(BaseMapDict[key])) {
+            if (key === e.target.value) return;
+            map.removeLayer(BaseMapDict[key]);
+        }
+    });
+    map.addLayer(BaseMapDict[e.target.value]);
+});
+
 document.getElementById('btnHelp').addEventListener('click', _ => {
     window.open('howto.html');
 });
+
+
 
 // map.on('locationfound', e => {
 //     const [lat, lng] = [e.latlng.lat, e.latlng.lng];
