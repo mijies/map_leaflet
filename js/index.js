@@ -6,13 +6,14 @@ const map = L.map('mapid', {
     maxZoom: INIT_ZOOM_MAX,
     minZoom: INIT_ZOOM_MIN,
     zoom: INIT_ZOOM_LEVEL,
-    layers: BaseMapDict[INIT_MAP],
+    layers: BaseTileMap.get(INIT_MAP),
     // Interaction Options
     bounceAtZoomLimits: false
 });
 
 loadNurseryFacilities(map);
 loadSchools(map);
+loadStations(map);
 
 
 L.control.scale({'imperial': false}).addTo(map);
@@ -67,19 +68,18 @@ Array.from(document.getElementsByClassName('layer-btn-school')).forEach(btn => {
 });
 
 
-addSelectBoxOptions('selectBaseMap', Object.keys(BaseMapDict).map(key => {
+addSelectBoxOptions('selectBaseMap', Array.from(BaseTileMap.keys()).map(key => {
     return {'value': key, 'text': key};
 }));
 
- 
 document.getElementById('selectBaseMap').addEventListener('change', e => {
-    Object.keys(BaseMapDict).forEach(key => {
-        if (map.hasLayer(BaseMapDict[key])) {
+    for (const [key, tile] of BaseTileMap) {
+        if (map.hasLayer(tile)) {
             if (key === e.target.value) return;
-            map.removeLayer(BaseMapDict[key]);
-        }
-    });
-    map.addLayer(BaseMapDict[e.target.value]);
+            map.removeLayer(tile);
+        }       
+    }
+    map.addLayer(BaseTileMap.get(e.target.value));
 });
 
 document.getElementById('btnHelp').addEventListener('click', _ => {

@@ -16,30 +16,33 @@ const INIT_ZOOM_MIN = 10;
 const INIT_ZOOM_LEVEL = 13;
 
 let Nursery_Facilities;
+
 const SCHOOL_LAYERS = {
-    "btnElementarySchool": null,
-    "btnMiddleSchool": null    // L.layerGroup([MiddleSchool, MiddleSchool_loc])
+    btnElementarySchool: null,
+    btnMiddleSchool: null    // L.layerGroup([MiddleSchool, MiddleSchool_loc])
 };
 
+const STATION_MAP = new Map();
+
 const NURSERY_LAYERS = {
-    "btnPubNinka": [],
-    "btnPriNinka": [],
-    "btnJigyosho": [],
-    "btnYhoiku": [],
-    "btnNinkagai": [],
-    "btnDisability": [],
-    "btnGakudou": [],
-    "btnKindergarten": []
+    btnPubNinka: [],
+    btnPriNinka: [],
+    btnJigyosho: [],
+    btnYhoiku: [],
+    btnNinkagai: [],
+    btnDisability: [],
+    btnGakudou: [],
+    btnKindergarten: []
 }
 
 const NURSERY_ICONS = {
-    "公立認可保育所": {
-        "btn_id": "btnPubNinka",
-        "zIndexOffset": 80,
-        "className":"pubninka-icon"
+    公立認可保育所: {
+        btn_id: "btnPubNinka",
+        zIndexOffset: 80,
+        className:"pubninka-icon"
     },
-    "横浜保育室": {
-        "btn_id": "btnYhoiku",
+    横浜保育室: {
+        btn_id: "btnYhoiku",
         "zIndexOffset": 70,
         "className": "yhoiku-icon"
     },   

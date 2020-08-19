@@ -11,8 +11,9 @@ const AddNurseryLayers = (Nursery_Facilities, map) => {
     // layers for each facility type
     Object.keys(NURSERY_ICONS).forEach(type => {
         NURSERY_LAYERS[NURSERY_ICONS[type].btn_id] = L.geoJSON(
-            Nursery_Facilities, getGeoJSONOptions(type)).addTo(map);
+            Nursery_Facilities, nurseryGeoJSONOptions(type)).addTo(map);
     });
+    // for 
 }
 
 loadSchools = (map) => {
@@ -35,7 +36,39 @@ loadSchools = (map) => {
     });
 };
 
-const getGeoJSONOptions = (type) => {
+loadStations = (map) => {
+    loadJSON('data/station.geojson', response => {
+        JSON.parse(response).features.forEach(f => {
+            const p = f.properties;
+            const s = `${p.N05_003} (${p.N05_002})`;
+            if (!STATION_MAP.has(s)) STATION_MAP.set(s, []);
+            STATION_MAP.get(s).push({
+                name: p.N05_011,
+                lat: f.geometry.coordinates[1],
+                lon: f.geometry.coordinates[0]
+            });
+        });
+
+        const select = document.getElementById("selectStation");
+        const optGrp = document.createElement("optgroup");
+        optGrp.label = "公共交通機関施設";
+        select.appendChild(optGrp);
+
+        for (const key of STATION_MAP.keys()) {
+            const optGrp = document.createElement("optgroup");
+            optGrp.label = key;
+            STATION_MAP.get(key).forEach(data => {
+                const option = document.createElement("option");
+                option.value = data.name;
+                option.text = data.name;
+                optGrp.appendChild(option);
+            });
+            select.appendChild(optGrp);
+        }
+    });
+};
+
+const nurseryGeoJSONOptions = (type) => {
     return {
         pointToLayer: nurseryStyleFunction(type),
         onEachFeature: nurseryOnEachFeature,
