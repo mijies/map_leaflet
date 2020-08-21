@@ -36,38 +36,6 @@ loadSchools = (map) => {
     });
 };
 
-loadStations = (map) => {
-    loadJSON('data/station.geojson', response => {
-        JSON.parse(response).features.forEach(f => {
-            const p = f.properties;
-            const s = `${p.N05_003} (${p.N05_002})`;
-            if (!STATION_MAP.has(s)) STATION_MAP.set(s, []);
-            STATION_MAP.get(s).push({
-                name: p.N05_011,
-                lat: f.geometry.coordinates[1],
-                lon: f.geometry.coordinates[0]
-            });
-        });
-
-        const select = document.getElementById("selectStation");
-        const optGrp = document.createElement("optgroup");
-        optGrp.label = "公共交通機関施設";
-        select.appendChild(optGrp);
-
-        for (const key of STATION_MAP.keys()) {
-            const optGrp = document.createElement("optgroup");
-            optGrp.label = key;
-            STATION_MAP.get(key).forEach(data => {
-                const option = document.createElement("option");
-                option.value = data.name;
-                option.text = data.name;
-                optGrp.appendChild(option);
-            });
-            select.appendChild(optGrp);
-        }
-    });
-};
-
 const nurseryGeoJSONOptions = (type) => {
     return {
         pointToLayer: nurseryStyleFunction(type),
@@ -102,23 +70,23 @@ const getNurseryPopupOptions = () => {
     };
 };
 
+const htmlTableBuilder = () => {
+    var content = '<table><tbody>';
+    const fn = (th, td) => {
+        content += '<tr>';
+        content += `<th>${th}</th>`;
+        content += `<td>${td}</td>`;
+        content += '</tr>';
+    }
+    fn.done = () => content += '</tbody></table>';
+    return fn;
+};
+
 const getNurseryPopupHtml = (feature) => {
     const p = feature.properties;
     let txt = `<b>${p.Name}</b></br>`;
 
-    // closure for table content
-    table = (() => {
-        var content = '<table><tbody>';
-        const fn = (th, td) => {
-            content += '<tr>';
-            content += `<th>${th}</th>`;
-            content += `<td>${td}</td>`;
-            content += '</tr>';
-        }
-        fn.done = () => content += '</tbody></table>';
-        return fn;
-    })();
-
+    table = htmlTableBuilder();
     table('区分', p.Type);
     
     if (p.Open && p.Close) {
@@ -192,3 +160,37 @@ const getNurseryPopupHtml = (feature) => {
     return txt + table.done();
 };
 
+loadStations = (map) => {
+    loadJSON('data/station.geojson', response => {
+        JSON.parse(response).features.forEach(f => {
+            const p = f.properties;
+            const s = `${p.N05_003} (${p.N05_002})`;
+            if (!STATION_MAP.has(s)) STATION_MAP.set(s, []);
+            STATION_MAP.get(s).push({
+                name: p.N05_011,
+                lat: f.geometry.coordinates[1],
+                lng: f.geometry.coordinates[0]
+            });
+        });
+        addStationSelectboxOptions();
+    });
+};
+
+const addStationSelectboxOptions = () => {
+    const select = document.getElementById("selectStation");
+    const optGrp = document.createElement("optgroup");
+    optGrp.label = "公共交通機関施設";
+    select.appendChild(optGrp);
+
+    for (const key of STATION_MAP.keys()) {
+        const optGrp = document.createElement("optgroup");
+        optGrp.label = key;
+        STATION_MAP.get(key).forEach(data => {
+            const option = document.createElement("option");
+            option.value = data.name;
+            option.text = data.name;
+            optGrp.appendChild(option);
+        });
+        select.appendChild(optGrp);
+    }
+};

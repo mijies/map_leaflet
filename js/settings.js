@@ -2,7 +2,7 @@
 
 const BING_API_KEY = 'Ahs7qRRd1eAtwgE7igbe7DOnXYvq_Pg81foKgM727r3S1949_mj8hrsqIY4iAxW9';
 
-const INIT_MAP = 'Bing'
+const INIT_MAP = '標準(Bing)'
 const INIT_LONGITUDE = 35.51264;
 const INIT_LATITUDE = 139.61827;
 
@@ -23,6 +23,8 @@ const SCHOOL_LAYERS = {
 };
 
 const STATION_MAP = new Map();
+let CURRENT_STATION_NAME = ""; // 最寄駅で選択されている駅名
+let CURRENT_STATION = null;  // 最寄駅で選択されているMarkerオブジェクト
 
 const NURSERY_LAYERS = {
     btnPubNinka: [],

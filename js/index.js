@@ -82,6 +82,22 @@ document.getElementById('selectBaseMap').addEventListener('change', e => {
     map.addLayer(BaseTileMap.get(e.target.value));
 });
 
+document.getElementById('selectStation').addEventListener('change', e => {
+    if (CURRENT_STATION_NAME === e.target.value) return;
+    if (CURRENT_STATION) map.removeLayer(CURRENT_STATION);
+    for (const stations of STATION_MAP.values()) {
+        stations.forEach(station => {
+            if (station.name === e.target.value) {
+                const latLng = [station.lat, station.lng];
+                CURRENT_STATION_NAME = station.name;
+                CURRENT_STATION = L.marker(latLng, {zIndexOffset: 200}).addTo(map);
+                map.setView(latLng);
+                return;
+            }
+        });
+    }
+});
+
 document.getElementById('btnHelp').addEventListener('click', _ => {
     window.open('howto.html');
 });
