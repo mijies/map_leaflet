@@ -17,14 +17,14 @@
 <body>
     <div id='mapid'>
     </div>
-    <!-- <div id="nav1-btn-div">
-        <button type="button" id="nav1-btn" data-mini="true">
+    <div class="menu-div-cls" id="menu-btn-div">
+        <button type="button" id="menu-btn">
             <img src="images/bars-black.svg" alt="menu">
         </button>
-        </div> -->
-    <div id="menu-div">
+    </div>
+    <div class="menu-div-cls" id="menu-div">
         <ul id="menu-ul">
-            <li class="menu-layer-li">
+            <li class="menu-li menu-layer-li">
                 <button type="button" class="layer-btn" id="btnPubNinka"><b>公立認可</b></button>
                 <button type="button" class="layer-btn" id="btnPriNinka"><b>私立認可</b></button>
                 <button type="button" class="layer-btn" id="btnJigyosho"><b>小規模等</b></button>
@@ -36,7 +36,7 @@
                 <button type="button" class="layer-btn-school" id="btnElementarySchool"><b>小</b></button>
                 <button type="button" class="layer-btn-school" id="btnMiddleSchool"><b>中</b></button>
             </li>
-            <li class="menu-control-li">
+            <li class="menu-li menu-control-li">
                 <button type="button" class="control-btn" id="btnFilter">
                     <b>検索 </b><img width="10" height="10" src="images/filter-black.png">
                 </button>
@@ -45,13 +45,13 @@
                     <b>新設園 </b><img width="10" height="10" src="images/filter-black.png">
                 </button>
 
-                <button type="button" class="control-btn control-btn-select">
+                <button type="button" class="control-btn control-btn-select" id="btnBaseMap">
                     <select class="control-select" id="selectBaseMap">
                         <option selected hidden>背景</option>
                     </select>
                 </button>
 
-                <button type="button" class="control-btn control-btn-select">
+                <button type="button" class="control-btn control-btn-select" id="btnStation">
                     <select class="control-select" id="selectStation">
                         <option selected hidden>最寄駅</option>
                     </select>

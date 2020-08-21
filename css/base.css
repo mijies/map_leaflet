@@ -11,20 +11,33 @@ html, body, #mapid {
     z-index: 1;
 }
 
-/* #nav1-btn-div {
-	position: fixed;
-    top:0;
-    right:20px;
+.menu-div-cls {
+    position: fixed;
+    top:0;  
+    z-index: 2;
 	padding: 0;
+	margin: 0;
+}
+
+#menu-btn-div {
+    display: none;
+    top 2px;
+    right: 7px;
+}
+
+#menu-btn {
+    background-color: white;
+	border: groove white;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    padding: 5px 8px 5px 8px;
     margin: 0;
-} */
+}
+#menu-btn:hover {
+	background-color: lightblue;
+}
 
 #menu-div {
-	position: fixed;
-    top:0; left: 50px;
-    z-index: 2;
-    padding: 0;
-    margin: 0;
+    left: 50px;
 }
 #menu-ul, .menu-layer-li {
     padding: 0;

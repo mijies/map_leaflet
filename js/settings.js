@@ -15,6 +15,9 @@ const INIT_ZOOM_MAX = 18;
 const INIT_ZOOM_MIN = 10;
 const INIT_ZOOM_LEVEL = 13;
 
+// Windowサイズの変更
+let RESIZE_TIMER;
+
 let Nursery_Facilities;
 
 const SCHOOL_LAYERS = {

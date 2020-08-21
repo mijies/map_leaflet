@@ -102,6 +102,27 @@ document.getElementById('btnHelp').addEventListener('click', _ => {
     window.open('howto.html');
 });
 
+// メニューボタンをクリックした時のイベントの登録
+document.getElementById('menu-btn').addEventListener('click', _ => {
+    const li = document.getElementsByClassName("menu-li");
+    if (li[0].style.display === "none") {
+        li[0].style.display ="inline-block";
+        li[1].style.display ="inline-block";
+        return;
+    }
+    li[0].style.display ="none";
+    li[1].style.display ="none";
+});
+
+// Windowsサイズの変更時のイベントを登録
+const menuResizer = menuResizeHandle();
+menuResizer();
+window.addEventListener('resize', _ => {
+    if (RESIZE_TIMER !== null) {
+        clearTimeout(RESIZE_TIMER);
+    }
+    RESIZE_TIMER = setTimeout(menuResizer, 100);
+});
 
 
 // map.on('locationfound', e => {
