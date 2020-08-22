@@ -31,6 +31,8 @@ const menuResizeHandle = () => {
         return document.getElementById(id);
     });
 
+    const thresholdWidth = menuList[0].clientWidth + 50;
+
     const collapseMenu = () => {
         menuList[0].style.display ="none";
         menuList[1].style.display ="none";
@@ -70,7 +72,7 @@ const menuResizeHandle = () => {
 
     return () => {
          // Windowサイズがメニューの幅より小さい場合(つまりメニューが複数行となる場合)
-        if (menuList[0].clientHeight > 50) {
+        if (thresholdWidth > window.innerWidth) {
             collapseMenu();
             return;
         }

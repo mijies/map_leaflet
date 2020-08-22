@@ -60,14 +60,13 @@ html, body, #mapid {
     padding: 5px 8px 5px 8px;
     margin: 0;
 }
-.layer-btn:hover {
-	color: lightblue;
-}
+
 .layer-btn:focus, .layer-btn-school:focus, .control-btn:focus, .control-select:focus {
 	outline: none;
 }
 
 .control-btn {
+    border: groove white;
     color: black;
 }
 .control-btn:hover {
@@ -83,6 +82,13 @@ html, body, #mapid {
     font-weight: bold;
     padding-bottom: 3px;
     background-color: rgba(255,255,255,0.0);
+}
+
+#btnBaseMap, #btnStation, #btnHelp {
+    vertical-align: middle; /* alignment adjustment */
+}
+#btnHelp {
+    padding-bottom: 7px;
 }
 
 #btnPubNinka {
