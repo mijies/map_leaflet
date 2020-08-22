@@ -40,6 +40,8 @@ const NURSERY_LAYERS = {
     btnKindergarten: []
 }
 
+const EVENT_HANDLE = {};
+
 const NURSERY_ICONS = {
     公立認可保育所: {
         btn_id: "btnPubNinka",

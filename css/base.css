@@ -39,36 +39,43 @@ html, body, #mapid {
 #menu-div {
     left: 50px;
 }
-#menu-ul, .menu-layer-li {
+
+#menu-div ul {
     padding: 0;
     margin: 0;
-    letter-spacing: -0.5em;
+    /* letter-spacing: -0.5em; */
+    font-size: 0;
 }
-.menu-layer-li {
+
+#menu-div ul li {
     display: inline-block;
-}
-
-.btn-div {
-    margin: 10;
-    font-size:0;
-}
-
-.layer-btn, .layer-btn-school, .control-btn {
     color: white;
 	border: groove white;
     border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
     padding: 5px 8px 5px 8px;
     margin: 0;
+    font-size: 13px;
+    cursor: pointer;
 }
 
-.layer-btn:focus, .layer-btn-school:focus, .control-btn:focus, .control-select:focus {
-	outline: none;
+#menu-div ul li:hover {
+    color: lightblue;
 }
 
-.control-btn {
-    border: groove white;
+
+
+
+
+
+
+
+
+
+#btnFilter, #btnNewSchool {
     color: black;
 }
+
+
 .control-btn:hover {
     background-color: rgba(224,255,255,0.8);
 }

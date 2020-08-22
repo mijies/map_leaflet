@@ -14,7 +14,7 @@ const map = L.map('mapid', {
 
 loadNurseryFacilities(map);
 loadSchools(map);
-loadStations(map);
+// loadStations(map);
 
 
 L.control.scale({'imperial': false}).addTo(map);
@@ -22,112 +22,67 @@ L.control.locate({"keepCurrentZoomLevel": true}).addTo(map);
 // L.control.layers(TileLayersObjs).addTo(map);
 // map.removeControl();
 
-Array.from(document.getElementsByClassName('layer-btn')).forEach(btn => {
-    btn.on = true;
-    btn.addEventListener('click', e => {
-        if (btn.on) {
-            map.removeLayer(NURSERY_LAYERS[btn.id]);
-            btn.style.color = "grey";
-            btn.style["background-color"] = "rgba(240,240,240,0.8)";
-            btn.on = false;
-            return;
-        }
-        map.addLayer(NURSERY_LAYERS[btn.id]);
-        btn.style.color = "white";
-        btn.style["background-color"] = "";
-        btn.on = true;
-    });
+
+Array.from(document.getElementById('menu-facility-ul').children).forEach(li => {
+    li.addEventListener('click', EVENT_HANDLE[li.id](li));
+    
     /* clickイベントのstyle書き換えでcssのhover無効への対処 */
-    btn.addEventListener('mouseenter', _ => {
-        btn.style.color = "lightblue";
-        if (!btn.on) {
-            btn.style.border = "groove white";
-            btn.style["background-color"] = "rgba(240,240,240,0.8)";        
+    li.addEventListener('mouseenter', _ => {
+        li.style.color = "lightblue";
+        if (!li.on) {
+            li.style.border = "groove white";
+            li.style["background-color"] = "rgba(240,240,240,0.8)";        
         }
     });
-    btn.addEventListener('mouseleave', _ => {
-        btn.style.color = "white";
-        if (!btn.on) {
-            btn.style.color = "grey";
-            btn.style.border = "";
-            btn.style["background-color"] = "rgba(240,240,240,0.8)";        
-        }
-    });
-});
-
-Array.from(document.getElementsByClassName('layer-btn-school')).forEach(btn => {
-    btn.style.color = "grey";
-    btn.style["background-color"] = "rgba(240,240,240,0.8)";
-    btn.on = false;
-    btn.addEventListener('click', _ => {
-        if (btn.on) {
-            map.removeLayer(SCHOOL_LAYERS[btn.id]);
-            btn.style.color = "grey";
-            btn.style["background-color"] = "rgba(240,240,240,0.8)";
-            btn.on = false;
-            return;
-        }
-        map.addLayer(SCHOOL_LAYERS[btn.id]);
-        btn.style.color = "";
-        btn.style["background-color"] = "";
-        btn.on = true;
-    });
-    /* clickイベントのstyle書き換えでcssのhover無効への対処 */
-    btn.addEventListener('mouseenter', _ => {
-        btn.style.color = "lightblue";
-        if (!btn.on) {
-            btn.style.border = "groove white";
-            btn.style["background-color"] = "rgba(240,240,240,0.8)";    
-        }
-    });
-    btn.addEventListener('mouseleave', _ => {
-        btn.style.color = "white";
-        if (!btn.on) {
-            btn.style.color = "grey";
-            btn.style.border = "";
-            btn.style["background-color"] = "rgba(240,240,240,0.8)";          
+    li.addEventListener('mouseleave', _ => {
+        li.style.color = "white";
+        if (!li.on) {
+            li.style.color = "grey";
+            li.style.border = "";
+            li.style["background-color"] = "rgba(240,240,240,0.8)";        
         }
     });
 });
 
-document.getElementById('btnFilter').addEventListener('click', _ => {
-    console.log(111)
-    document.getElementById("filter-popup-div").style.display = "block";
-});
 
-addSelectBoxOptions('selectBaseMap', Array.from(BaseTileMap.keys()).map(key => {
-    return {'value': key, 'text': key};
-}));
+// document.getElementById('btnFilter').addEventListener('click', _ => {
+//     console.log(111)
+//     document.getElementById("filter-popup-div").style.display = "block";
+// });
 
-document.getElementById('selectBaseMap').addEventListener('change', e => {
-    for (const [key, tile] of BaseTileMap) {
-        if (map.hasLayer(tile)) {
-            if (key === e.target.value) return;
-            map.removeLayer(tile);
-        }       
-    }
-    map.addLayer(BaseTileMap.get(e.target.value));
-});
+// addSelectBoxOptions('selectBaseMap', Array.from(BaseTileMap.keys()).map(key => {
+//     return {'value': key, 'text': key};
+// }));
 
-document.getElementById('selectStation').addEventListener('change', e => {
-    if (CURRENT_STATION_NAME === e.target.value) return;
-    if (CURRENT_STATION) map.removeLayer(CURRENT_STATION);
-    for (const stations of STATION_MAP.values()) {
-        stations.forEach(station => {
-            if (station.name === e.target.value) {
-                const latLng = [station.lat, station.lng];
-                CURRENT_STATION_NAME = station.name;
-                CURRENT_STATION = L.marker(latLng, {zIndexOffset: 200}).addTo(map);
-                map.setView(latLng);
-                return;
-            }
-        });
-    }
-});
+// document.getElementById('selectBaseMap').addEventListener('change', e => {
+//     for (const [key, tile] of BaseTileMap) {
+//         if (map.hasLayer(tile)) {
+//             if (key === e.target.value) return;
+//             map.removeLayer(tile);
+//         }       
+//     }
+//     map.addLayer(BaseTileMap.get(e.target.value));
+// });
 
-document.getElementById('btnHelp').addEventListener('click', _ => {
-    window.open('howto.html');
-});
+// document.getElementById('selectStation').addEventListener('change', e => {
+//     if (CURRENT_STATION_NAME === e.target.value) return;
+//     if (CURRENT_STATION) map.removeLayer(CURRENT_STATION);
+//     for (const stations of STATION_MAP.values()) {
+//         stations.forEach(station => {
+//             if (station.name === e.target.value) {
+//                 const latLng = [station.lat, station.lng];
+//                 CURRENT_STATION_NAME = station.name;
+//                 CURRENT_STATION = L.marker(latLng, {zIndexOffset: 200}).addTo(map);
+//                 map.setView(latLng);
+//                 return;
+//             }
+//         });
+//     }
+// });
+
+// document.getElementById('btnHelp').addEventListener('click', _ => {
+//     window.open('howto.html');
+// });
 
 // メニューボタンをクリックした時のイベントの登録
 document.getElementById('menu-btn').addEventListener('click', _ => {
@@ -142,14 +97,14 @@ document.getElementById('menu-btn').addEventListener('click', _ => {
 });
 
 // Windowsサイズの変更時のイベントを登録
-const menuResizer = menuResizeHandle();
-menuResizer();
-window.addEventListener('resize', _ => {
-    if (RESIZE_TIMER !== null) {
-        clearTimeout(RESIZE_TIMER);
-    }
-    RESIZE_TIMER = setTimeout(menuResizer, 100);
-});
+// const menuResizer = menuResizeHandle();
+// menuResizer();
+// window.addEventListener('resize', _ => {
+//     if (RESIZE_TIMER !== null) {
+//         clearTimeout(RESIZE_TIMER);
+//     }
+//     RESIZE_TIMER = setTimeout(menuResizer, 100);
+// });
 
 
 // map.on('locationfound', e => {
