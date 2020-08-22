@@ -90,6 +90,10 @@ Array.from(document.getElementsByClassName('layer-btn-school')).forEach(btn => {
     });
 });
 
+document.getElementById('btnFilter').addEventListener('click', _ => {
+    console.log(111)
+    document.getElementById("filter-popup-div").style.display = "block";
+});
 
 addSelectBoxOptions('selectBaseMap', Array.from(BaseTileMap.keys()).map(key => {
     return {'value': key, 'text': key};

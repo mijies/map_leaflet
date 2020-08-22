@@ -181,3 +181,31 @@ html, body, #mapid {
     border-radius: 50%;
     background-color: salmon;
 }
+
+#filter-popup-div{
+    z-index: 500;
+    /* width: 300px; */
+	border: groove white;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.4);
+    background: white;
+    display: none;
+    position: fixed;
+    top:50%;
+    left:50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+}
+
+.filter-ul {
+    margin:0;
+    padding:0;
+    list-style: none;
+  }
+.filter-ul li {
+    display: table-cell;
+    *display: inline-block;
+    padding: 5px;
+    border: groove white;
+}
