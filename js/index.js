@@ -7,6 +7,7 @@ const map = L.map('mapid', {
     minZoom: INIT_ZOOM_MIN,
     zoom: INIT_ZOOM_LEVEL,
     layers: BaseTileMap.get(INIT_MAP),
+    
     // Interaction Options
     bounceAtZoomLimits: false
 });
@@ -26,44 +27,66 @@ Array.from(document.getElementsByClassName('layer-btn')).forEach(btn => {
     btn.addEventListener('click', e => {
         if (btn.on) {
             map.removeLayer(NURSERY_LAYERS[btn.id]);
-            btn.style = "color: grey; background-color: rgba(240,240,240,0.8)";
+            btn.style.color = "grey";
+            btn.style["background-color"] = "rgba(240,240,240,0.8)";
             btn.on = false;
             return;
         }
         map.addLayer(NURSERY_LAYERS[btn.id]);
-        btn.style = "";
+        btn.style.color = "white";
+        btn.style["background-color"] = "";
         btn.on = true;
     });
     /* clickイベントのstyle書き換えでcssのhover無効への対処 */
     btn.addEventListener('mouseenter', _ => {
-        if (!btn.on) btn.style = "color: lightblue; background-color: rgba(240,240,240,0.8);border: groove white;";
+        btn.style.color = "lightblue";
+        if (!btn.on) {
+            btn.style.border = "groove white";
+            btn.style["background-color"] = "rgba(240,240,240,0.8)";        
+        }
     });
     btn.addEventListener('mouseleave', _ => {
-        if (!btn.on) btn.style = "color: grey; background-color: rgba(240,240,240,0.8);";
+        btn.style.color = "white";
+        if (!btn.on) {
+            btn.style.color = "grey";
+            btn.style.border = "";
+            btn.style["background-color"] = "rgba(240,240,240,0.8)";        
+        }
     });
 });
 
-// TODO: should be excuted in async
 Array.from(document.getElementsByClassName('layer-btn-school')).forEach(btn => {
-    btn.style = "color: grey; background-color: rgba(240,240,240,0.8)";
+    btn.style.color = "grey";
+    btn.style["background-color"] = "rgba(240,240,240,0.8)";
     btn.on = false;
     btn.addEventListener('click', _ => {
         if (btn.on) {
             map.removeLayer(SCHOOL_LAYERS[btn.id]);
-            btn.style = "color: grey; background-color: rgba(240,240,240,0.8)";
+            btn.style.color = "grey";
+            btn.style["background-color"] = "rgba(240,240,240,0.8)";
             btn.on = false;
             return;
         }
         map.addLayer(SCHOOL_LAYERS[btn.id]);
-        btn.style = "";
+        btn.style.color = "";
+        btn.style["background-color"] = "";
         btn.on = true;
     });
     /* clickイベントのstyle書き換えでcssのhover無効への対処 */
     btn.addEventListener('mouseenter', _ => {
-        if (!btn.on) btn.style = "color: lightblue; background-color: rgba(240,240,240,0.8);border: groove white;";
+        btn.style.color = "lightblue";
+        if (!btn.on) {
+            btn.style.border = "groove white";
+            btn.style["background-color"] = "rgba(240,240,240,0.8)";    
+        }
     });
     btn.addEventListener('mouseleave', _ => {
-        if (!btn.on) btn.style = "color: grey; background-color: rgba(240,240,240,0.8);";
+        btn.style.color = "white";
+        if (!btn.on) {
+            btn.style.color = "grey";
+            btn.style.border = "";
+            btn.style["background-color"] = "rgba(240,240,240,0.8)";          
+        }
     });
 });
 
