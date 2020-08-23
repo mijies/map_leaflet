@@ -15,57 +15,54 @@
     <script src="js/Bing.js"></script> 
 </head>
 <body>
-    <div id='mapid'>
-    </div>
-    <div class="menu-div-cls" id="menu-btn-div">
+    <div id='mapid'></div>
+    <div id="menu-btn-div">
         <button type="button" id="menu-btn">
             <img src="images/bars-black.svg" alt="menu">
         </button>
     </div>
-    <div class="menu-div-cls" id="menu-div">
-        <ul id="menu-facility-ul">
-            <li id="btnPubNinka"><b>公立認可</b></li>
-            <li id="btnPriNinka"><b>私立認可</b></li>
-            <li id="btnJigyosho"><b>小規模等</b></li>
-            <li id="btnYhoiku"><b>横浜保育室</b></li>
-            <li id="btnNinkagai"><b>認可外</b></li>
-            <li id="btnDisability"><b>障害児通所支援</b></li>
-            <li id="btnGakudou"><b>学童保育</b></li>
-            <li id="btnKindergarten"><b>幼</b></li>
-            <li id="btnElementarySchool"><b>小</b></li>
-            <li id="btnMiddleSchool"><b>中</b></li>
-        </ul>
-                <!-- <button type="button" class="layer-btn-school" id=""><b></b></button>
-                <button type="button" class="layer-btn-school" id=""><b></b></button>
+    <div id="menu-div">
+        <ul id="menu-ul">
+            <li>
+                <ul id="menu-facility-ul">
+                    <li id="btnPubNinka"><b>公立認可</b></li>
+                    <li id="btnPriNinka"><b>私立認可</b></li>
+                    <li id="btnJigyosho"><b>小規模等</b></li>
+                    <li id="btnYhoiku"><b>横浜保育室</b></li>
+                    <li id="btnNinkagai"><b>認可外</b></li>
+                    <li id="btnDisability"><b>障害児通所支援</b></li>
+                    <li id="btnGakudou"><b>学童保育</b></li>
+                    <li id="btnKindergarten"><b>幼</b></li>
+                    <li id="btnElementarySchool"><b>小</b></li>
+                    <li id="btnMiddleSchool"><b>中</b></li>
+                </ul>
             </li>
-            <li class="menu-li" id="menu-control-li">
-                <button type="button" class="control-btn" id="btnFilter">
-                    <b>検索 </b><img width="10" height="10" src="images/filter-black.png">
-                </button>
-
-                <button type="button" class="control-btn" id="btnNewSchool">
-                    <b>新設園 </b><img width="10" height="10" src="images/filter-black.png">
-                </button>
-
-                <button type="button" class="control-btn control-btn-select" id="btnBaseMap">
-                    <select class="control-select" id="selectBaseMap">
-                        <option selected hidden>背景</option>
-                    </select>
-                </button>
-
-                <button type="button" class="control-btn control-btn-select" id="btnStation">
-                    <select class="control-select" id="selectStation">
-                        <option selected hidden>最寄駅</option>
-                    </select>
-                </button>
-                
-                <button type="button" class="control-btn" id="btnHelp">
-                    <img style="vertical-align: middle" width="16" height="16" src="images/question-circle.png">
-                </button>
-                
-            </li> -->
-        <!-- </ul> -->
+            <li>
+                <ul id="menu-control-ul">
+                    <li id="btnFilter"><b>検索</b>
+                        <img width="10" height="10" src="images/filter-black.png">
+                    </li>
+                    <li id="btnNewSchool"><b>新設園</b>
+                        <img width="10" height="10" src="images/filter-black.png">
+                    </li>
+                    <li id="btnSelectBaseMap">
+                        <select id="selectBaseMap">
+                            <option selected hidden>背景</option>
+                        </select>
+                    </li>
+                    <li id="btnSelectStation">
+                        <select id="selectStation">
+                            <option selected hidden>最寄駅</option>
+                        </select>
+                    </li>
+                    <li id="btnHelp">
+                        <img style="vertical-align: middle" width="16" height="16" src="images/question-circle.png">
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
+
     <div id="filter-popup-div">
         <h4><b>保育施設 絞り込み</b></h4>
 

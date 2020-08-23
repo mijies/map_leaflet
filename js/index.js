@@ -14,7 +14,7 @@ const map = L.map('mapid', {
 
 loadNurseryFacilities(map);
 loadSchools(map);
-// loadStations(map);
+loadStations(map);
 
 
 L.control.scale({'imperial': false}).addTo(map);
@@ -25,7 +25,7 @@ L.control.locate({"keepCurrentZoomLevel": true}).addTo(map);
 
 Array.from(document.getElementById('menu-facility-ul').children).forEach(li => {
     li.addEventListener('click', EVENT_HANDLE[li.id](li));
-    
+
     /* clickイベントのstyle書き換えでcssのhover無効への対処 */
     li.addEventListener('mouseenter', _ => {
         li.style.color = "lightblue";
@@ -44,67 +44,38 @@ Array.from(document.getElementById('menu-facility-ul').children).forEach(li => {
     });
 });
 
+Array.from(document.getElementById('menu-control-ul').children).forEach(li => {
+    EVENT_HANDLE[li.id](li);
+});
 
-// document.getElementById('btnFilter').addEventListener('click', _ => {
-//     console.log(111)
-//     document.getElementById("filter-popup-div").style.display = "block";
-// });
+addSelectBoxOptions('selectBaseMap', Array.from(BaseTileMap.keys()).map(key => {
+    return {'value': key, 'text': key};
+}));
 
-// addSelectBoxOptions('selectBaseMap', Array.from(BaseTileMap.keys()).map(key => {
-//     return {'value': key, 'text': key};
-// }));
-
-// document.getElementById('selectBaseMap').addEventListener('change', e => {
-//     for (const [key, tile] of BaseTileMap) {
-//         if (map.hasLayer(tile)) {
-//             if (key === e.target.value) return;
-//             map.removeLayer(tile);
-//         }       
-//     }
-//     map.addLayer(BaseTileMap.get(e.target.value));
-// });
-
-// document.getElementById('selectStation').addEventListener('change', e => {
-//     if (CURRENT_STATION_NAME === e.target.value) return;
-//     if (CURRENT_STATION) map.removeLayer(CURRENT_STATION);
-//     for (const stations of STATION_MAP.values()) {
-//         stations.forEach(station => {
-//             if (station.name === e.target.value) {
-//                 const latLng = [station.lat, station.lng];
-//                 CURRENT_STATION_NAME = station.name;
-//                 CURRENT_STATION = L.marker(latLng, {zIndexOffset: 200}).addTo(map);
-//                 map.setView(latLng);
-//                 return;
-//             }
-//         });
-//     }
-// });
-
-// document.getElementById('btnHelp').addEventListener('click', _ => {
-//     window.open('howto.html');
-// });
 
 // メニューボタンをクリックした時のイベントの登録
 document.getElementById('menu-btn').addEventListener('click', _ => {
-    const li = document.getElementsByClassName("menu-li");
-    if (li[0].style.display === "none") {
-        li[0].style.display ="inline-block";
-        li[1].style.display ="inline-block";
+    const menuList = Array.from(document.getElementById("menu-div").querySelectorAll("li"));
+    if (menuList[0].style.display === "none") {
+        menuList.forEach(list => {
+            list.style.display ="inline-block";
+        });
         return;
     }
-    li[0].style.display ="none";
-    li[1].style.display ="none";
+    menuList.forEach(list => {
+        list.style.display ="none";
+    });
 });
 
 // Windowsサイズの変更時のイベントを登録
-// const menuResizer = menuResizeHandle();
-// menuResizer();
-// window.addEventListener('resize', _ => {
-//     if (RESIZE_TIMER !== null) {
-//         clearTimeout(RESIZE_TIMER);
-//     }
-//     RESIZE_TIMER = setTimeout(menuResizer, 100);
-// });
+const menuResizer = menuResizeHandle();
+menuResizer();
+window.addEventListener('resize', _ => {
+    if (RESIZE_TIMER !== null) {
+        clearTimeout(RESIZE_TIMER);
+    }
+    RESIZE_TIMER = setTimeout(menuResizer, 100);
+});
 
 
 // map.on('locationfound', e => {

@@ -11,9 +11,9 @@ html, body, #mapid {
     z-index: 1;
 }
 
-.menu-div-cls {
+#menu-btn-div, #menu-div {
     position: fixed;
-    top:0;  
+    top: 0;  
     z-index: 2;
 	padding: 0;
 	margin: 0;
@@ -21,7 +21,7 @@ html, body, #mapid {
 
 #menu-btn-div {
     display: none;
-    top 2px;
+    top: 2px;
     right: 7px;
 }
 
@@ -49,54 +49,52 @@ html, body, #mapid {
 
 #menu-div ul li {
     display: inline-block;
+    margin: 0;
+}
+
+#menu-div #menu-ul ul li {
     color: white;
 	border: groove white;
     border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
     padding: 5px 8px 5px 8px;
-    margin: 0;
     font-size: 13px;
     cursor: pointer;
 }
 
-#menu-div ul li:hover {
+#menu-div #menu-ul #menu-control-ul li {
+    color: black;
+    background-color: white;
+}
+
+#menu-div #menu-ul #menu-facility-ul li:hover {
     color: lightblue;
 }
-
-
-
-
-
-
-
-
-
-
-#btnFilter, #btnNewSchool {
-    color: black;
+#menu-div #menu-ul #menu-control-ul li:hover {
+    background-color: rgba(240,240,240,0.8);
 }
 
-
-.control-btn:hover {
-    background-color: rgba(224,255,255,0.8);
-}
-
-.control-btn-select {
-    padding-top: 3px;
-}
-.control-select {
-    border :1px solid #eee;
-    font-size :14px;
+#menu-div select {
+    margin: 0;
+    border: 0;
     font-weight: bold;
-    padding-bottom: 3px;
-    background-color: rgba(255,255,255,0.0);
+    vertical-align: middle;  /* alignment adjustment */
+    background-color: rgba(225, 255, 255, 0.0);
+    padding-bottom: 4px;
+}
+#menu-div select:focus {
+    outline: none;
+}
+#menu-div #selectBaseMap {
+    width: 50px;
+}
+#menu-div #selectStation {
+    width: 65px;
 }
 
-#btnBaseMap, #btnStation, #btnHelp {
-    vertical-align: middle; /* alignment adjustment */
+#menu-div ul li ul #btnHelp {
+    padding-bottom: 5px;
 }
-#btnHelp {
-    padding-bottom: 7px;
-}
+
 
 #btnPubNinka {
 	background-color: green;

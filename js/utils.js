@@ -47,13 +47,66 @@ const menuListSchoolClickEvent = (li) => {
     };
 };
 
+const menuListFilterEvent = (li) => {
+    li.addEventListener('click', _ => {
+        document.getElementById("filter-popup-div").style.display = "block";
+    });
+};
+
+const menuListNewSchoolEvent = (li) => {
+    // TODO
+
+    // li.addEventListener('click', _ => {
+    //     document.getElementById("filter-popup-div").style.display = "block";
+    // });
+};
+
+const menuListBaseMapEvent = (li) => {
+    document.getElementById('selectBaseMap').addEventListener('change', e => {
+        for (const [key, tile] of BaseTileMap) {
+            if (map.hasLayer(tile)) {
+                if (key === e.target.value) return;
+                map.removeLayer(tile);
+            }       
+        }
+        map.addLayer(BaseTileMap.get(e.target.value));
+    });
+};
+
+const menuListStationEvent = (li) => {
+    document.getElementById('selectStation').addEventListener('change', e => {
+        if (CURRENT_STATION_NAME === e.target.value) return;
+        if (CURRENT_STATION) map.removeLayer(CURRENT_STATION);
+        for (const stations of STATION_MAP.values()) {
+            stations.forEach(station => {
+                if (station.name === e.target.value) {
+                    const latLng = [station.lat, station.lng];
+                    CURRENT_STATION_NAME = station.name;
+                    CURRENT_STATION = L.marker(latLng, {zIndexOffset: 200}).addTo(map);
+                    map.setView(latLng);
+                    return;
+                }
+            });
+        }
+    });
+};
+
+const menuListHelpEvent = (li) => {
+    document.getElementById('btnHelp').addEventListener('click', _ => {
+        window.open('howto.html');
+    });
+};
+
 Object.keys(NURSERY_LAYERS).forEach(key => {
     EVENT_HANDLE[key] = menuListFacilityClickEvent;
 });
-
 EVENT_HANDLE.btnElementarySchool = menuListSchoolClickEvent;
 EVENT_HANDLE.btnMiddleSchool = menuListSchoolClickEvent;
-
+EVENT_HANDLE.btnFilter = menuListFilterEvent;
+EVENT_HANDLE.btnNewSchool = menuListNewSchoolEvent;
+EVENT_HANDLE.btnSelectBaseMap = menuListBaseMapEvent;
+EVENT_HANDLE.btnSelectStation = menuListStationEvent;
+EVENT_HANDLE.btnHelp = menuListHelpEvent;
 
 
 const addSelectBoxOptions = (id, optList) => {
@@ -68,60 +121,44 @@ const addSelectBoxOptions = (id, optList) => {
 
 // メニューバーとロゴをWindowサイズに合わせて配置を変更する
 const menuResizeHandle = () => {
-    // const menuList = document.getElementsByClassName("menu-li");
-    // const itemList = Object.values(menuList[0].children).map(child => child);
-    // const menuDiv = document.getElementById("menu-div");
-    // const btnDiv = document.getElementById("menu-btn-div");
-    // const btnList = ["btnFilter", "btnNewSchool", "btnBaseMap", "btnStation", "btnHelp"].map(id => {
-    //     return document.getElementById(id);
-    // });
+    const menuList = Array.from(document.getElementById("menu-div").querySelectorAll("li"));
+    const facilityList = document.getElementById("menu-div").querySelector("li");
+    const menuDiv = document.getElementById("menu-div");
+    const btnDiv = document.getElementById("menu-btn-div");
+    const thresholdWidth = facilityList.clientWidth + 50;
 
-    // const thresholdWidth = menuList[0].clientWidth + 50;
+    const collapseMenu = () => {
+        menuList.forEach(list => {
+            list.style.display = "none";
+            list.style.width = (window.innerWidth / 3) + "px";
+        });
+        btnDiv.style.display = "block";
+        menuDiv.style.top = (btnDiv.clientHeight - 5) + "px";
 
-    // const collapseMenu = () => {
-    //     menuList[0].style.display ="none";
-    //     menuList[1].style.display ="none";
-    //     btnDiv.style.display = "block";
+        if (window.innerHeight > 580) {
+            menuDiv.style.left = (window.innerWidth / 3 * 2 - 5) + "px";
+        } else {
+            menuDiv.style.left = (window.innerWidth / 3 - 5) + "px";
+        }
+    };
 
-    //     itemList.forEach(item => {
-    //         item.style.width =  (window.innerWidth / 3) + "px";
-    //     });
-    //     btnList.forEach(btn => {
-    //         btn.style.width = (window.innerWidth / 3) + "px";
-    //     });
+    const uncollapseMenu = () => {
+        menuList.forEach(list => {
+            list.style.display = "inline-block";
+            list.style.width = "";
+        });
+        menuDiv.style.top = "0px";
+        menuDiv.style.left = "50px";
+        btnDiv.style.display = "none";
+    };
 
-    //     menuDiv.style.top = (btnDiv.clientHeight - 5) + "px";
-    //     if (window.innerHeight > 580) {
-    //         menuDiv.style.left = (window.innerWidth / 3 * 2 - 5) + "px";
-    //     } else {
-    //         menuDiv.style.left = (window.innerWidth / 3 - 5) + "px";
-    //     }
-    // };
-
-    // const uncollapseMenu = () => {
-    //     menuDiv.style.top = "0px";
-    //     menuDiv.style.left = "50px";
-
-    //     menuList[0].style.display ="inline-block";
-    //     menuList[1].style.display ="inline-block";
-    //     btnDiv.style.display = "none";
-
-    //     itemList.forEach(item => {
-    //         item.style.width = "";
-    //     });
-
-    //     btnList.forEach(btn => {
-    //         btn.style.width = "";
-    //     });
-    // };
-
-    // return () => {
-    //      // Windowサイズがメニューの幅より小さい場合(つまりメニューが複数行となる場合)
-    //     if (thresholdWidth > window.innerWidth) {
-    //         collapseMenu();
-    //         return;
-    //     }
-    //     // Windowサイズがメニューの幅より大きい場合
-    //     uncollapseMenu();
-    // };
+    return () => {
+         // Windowサイズがメニューの幅より小さい場合(つまりメニューが複数行となる場合)
+        if (thresholdWidth > window.innerWidth) {
+            collapseMenu();
+            return;
+        }
+        // Windowサイズがメニューの幅より大きい場合
+        uncollapseMenu();
+    };
 }
