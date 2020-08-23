@@ -92,7 +92,7 @@ const menuListStationEvent = (li) => {
 };
 
 const menuListHelpEvent = (li) => {
-    document.getElementById('btnHelp').addEventListener('click', _ => {
+    document.getElementById('listHelp').addEventListener('click', _ => {
         window.open('howto.html');
     });
 };
@@ -100,13 +100,13 @@ const menuListHelpEvent = (li) => {
 Object.keys(NURSERY_LAYERS).forEach(key => {
     EVENT_HANDLE[key] = menuListFacilityClickEvent;
 });
-EVENT_HANDLE.btnElementarySchool = menuListSchoolClickEvent;
-EVENT_HANDLE.btnMiddleSchool = menuListSchoolClickEvent;
-EVENT_HANDLE.btnFilter = menuListFilterEvent;
-EVENT_HANDLE.btnNewSchool = menuListNewSchoolEvent;
-EVENT_HANDLE.btnSelectBaseMap = menuListBaseMapEvent;
-EVENT_HANDLE.btnSelectStation = menuListStationEvent;
-EVENT_HANDLE.btnHelp = menuListHelpEvent;
+EVENT_HANDLE.listElementarySchool = menuListSchoolClickEvent;
+EVENT_HANDLE.listMiddleSchool = menuListSchoolClickEvent;
+EVENT_HANDLE.listFilter = menuListFilterEvent;
+EVENT_HANDLE.listNewSchool = menuListNewSchoolEvent;
+EVENT_HANDLE.listSelectBaseMap = menuListBaseMapEvent;
+EVENT_HANDLE.listSelectStation = menuListStationEvent;
+EVENT_HANDLE.listHelp = menuListHelpEvent;
 
 
 const addSelectBoxOptions = (id, optList) => {
@@ -121,14 +121,12 @@ const addSelectBoxOptions = (id, optList) => {
 
 // メニューバーとロゴをWindowサイズに合わせて配置を変更する
 const menuResizeHandle = () => {
-    const menuList = Array.from(document.getElementById("menu-div").querySelectorAll("li"));
-    const facilityList = document.getElementById("menu-div").querySelector("li");
     const menuDiv = document.getElementById("menu-div");
     const btnDiv = document.getElementById("menu-btn-div");
-    const thresholdWidth = facilityList.clientWidth + 50;
+    const facilityList = document.getElementById("menu-div").querySelector("li");
 
     const collapseMenu = () => {
-        menuList.forEach(list => {
+        MENU_LIST.forEach(list => {
             list.style.display = "none";
             list.style.width = (window.innerWidth / 3) + "px";
         });
@@ -143,18 +141,22 @@ const menuResizeHandle = () => {
     };
 
     const uncollapseMenu = () => {
-        menuList.forEach(list => {
+        MENU_LIST.forEach(list => {
             list.style.display = "inline-block";
             list.style.width = "";
         });
         menuDiv.style.top = "0px";
         menuDiv.style.left = "50px";
         btnDiv.style.display = "none";
+
+        if (facilityList.clientHeight > 50) {
+            collapseMenu();
+        }
     };
 
     return () => {
          // Windowサイズがメニューの幅より小さい場合(つまりメニューが複数行となる場合)
-        if (thresholdWidth > window.innerWidth) {
+        if (facilityList.clientHeight > 50) {
             collapseMenu();
             return;
         }

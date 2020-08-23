@@ -55,14 +55,13 @@ addSelectBoxOptions('selectBaseMap', Array.from(BaseTileMap.keys()).map(key => {
 
 // メニューボタンをクリックした時のイベントの登録
 document.getElementById('menu-btn').addEventListener('click', _ => {
-    const menuList = Array.from(document.getElementById("menu-div").querySelectorAll("li"));
-    if (menuList[0].style.display === "none") {
-        menuList.forEach(list => {
+    if (MENU_LIST[0].style.display === "none") {
+        MENU_LIST.forEach(list => {
             list.style.display ="inline-block";
         });
         return;
     }
-    menuList.forEach(list => {
+    MENU_LIST.forEach(list => {
         list.style.display ="none";
     });
 });

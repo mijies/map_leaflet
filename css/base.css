@@ -91,47 +91,47 @@ html, body, #mapid {
     width: 65px;
 }
 
-#menu-div ul li ul #btnHelp {
+#menu-div ul li ul #listHelp {
     padding-bottom: 5px;
 }
 
 
-#btnPubNinka {
+#listPubNinka {
 	background-color: green;
 }
 
-#btnPriNinka {
+#listPriNinka {
 	background-color: greenyellow;
 }
 
-#btnJigyosho {
+#listJigyosho {
 	background-color: mediumpurple;
 }
 
-#btnYhoiku {
+#listYhoiku {
 	background-color: dodgerblue;
 }
 
-#btnNinkagai {
+#listNinkagai {
 	background-color: mediumblue;
 }
 
-#btnDisability {
+#listDisability {
 	background-color: salmon;
 }
 
-#btnGakudou {
+#listGakudou {
 	background-color: darkgoldenrod;
 }
 
-#btnKindergarten {
+#listKindergarten {
 	background-color: red;
 }
 
-#btnElementarySchool {
+#listElementarySchool {
 	background-color: green;
 }
-#btnMiddleSchool {
+#listMiddleSchool {
 	background-color: grey;
 }
 

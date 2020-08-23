@@ -10,7 +10,7 @@ loadNurseryFacilities = (map) => {
 const AddNurseryLayers = (Nursery_Facilities, map) => {
     // layers for each facility type
     Object.keys(NURSERY_ICONS).forEach(type => {
-        NURSERY_LAYERS[NURSERY_ICONS[type].btn_id] = L.geoJSON(
+        NURSERY_LAYERS[NURSERY_ICONS[type].list_id] = L.geoJSON(
             Nursery_Facilities, nurseryGeoJSONOptions(type)).addTo(map);
     });
     // for 
@@ -21,7 +21,7 @@ loadSchools = (map) => {
     loadJSON('data/Elementary_loc.geojson', response => {
         loadJSON('data/Elementary.geojson', response => {
             elementary.push(L.geoJSON(JSON.parse(response)));
-            SCHOOL_LAYERS["btnElementarySchool"] = L.layerGroup(elementary);
+            SCHOOL_LAYERS["listElementarySchool"] = L.layerGroup(elementary);
         });
         elementary.push(L.geoJSON(JSON.parse(response)));
     });
@@ -30,7 +30,7 @@ loadSchools = (map) => {
     loadJSON('data/MiddleSchool_loc.geojson', response => {
         loadJSON('data/MiddleSchool.geojson', response => {
             middle.push(L.geoJSON(JSON.parse(response)));
-            SCHOOL_LAYERS["btnMiddleSchool"] = L.layerGroup(middle);
+            SCHOOL_LAYERS["listMiddleSchool"] = L.layerGroup(middle);
         });
         middle.push(L.geoJSON(JSON.parse(response)));
     });

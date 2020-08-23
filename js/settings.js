@@ -15,14 +15,15 @@ const INIT_ZOOM_MAX = 18;
 const INIT_ZOOM_MIN = 10;
 const INIT_ZOOM_LEVEL = 13;
 
-// Windowサイズの変更
-let RESIZE_TIMER;
+let RESIZE_TIMER; // Windowサイズの変更
+
+const MENU_LIST = Array.from(document.getElementById("menu-div").querySelectorAll("li")); // メニューの全てのli要素
 
 let Nursery_Facilities;
 
 const SCHOOL_LAYERS = {
-    btnElementarySchool: null,
-    btnMiddleSchool: null    // L.layerGroup([MiddleSchool, MiddleSchool_loc])
+    listElementarySchool: null,
+    listMiddleSchool: null    // L.layerGroup([MiddleSchool, MiddleSchool_loc])
 };
 
 const STATION_MAP = new Map();
@@ -30,56 +31,56 @@ let CURRENT_STATION_NAME = ""; // 最寄駅で選択されている駅名
 let CURRENT_STATION = null;  // 最寄駅で選択されているMarkerオブジェクト
 
 const NURSERY_LAYERS = {
-    btnPubNinka: [],
-    btnPriNinka: [],
-    btnJigyosho: [],
-    btnYhoiku: [],
-    btnNinkagai: [],
-    btnDisability: [],
-    btnGakudou: [],
-    btnKindergarten: []
+    listPubNinka: [],
+    listPriNinka: [],
+    listJigyosho: [],
+    listYhoiku: [],
+    listNinkagai: [],
+    listDisability: [],
+    listGakudou: [],
+    listKindergarten: []
 }
 
 const EVENT_HANDLE = {};
 
 const NURSERY_ICONS = {
     公立認可保育所: {
-        btn_id: "btnPubNinka",
+        list_id: "listPubNinka",
         zIndexOffset: 80,
         className:"pubninka-icon"
     },
     横浜保育室: {
-        btn_id: "btnYhoiku",
+        list_id: "listYhoiku",
         "zIndexOffset": 70,
         "className": "yhoiku-icon"
     },   
     "幼稚園": {
-        "btn_id": "btnKindergarten",
+        "list_id": "listKindergarten",
         "zIndexOffset": 60,
         "className": "kindergarten-icon"
     },
     "認可外保育施設": {
-        "btn_id": "btnNinkagai",
+        "list_id": "listNinkagai",
         "zIndexOffset": 50,
         "className": "ninkagai-icon"
     },
     "小規模・事業所内保育事業": {
-        "btn_id": "btnJigyosho",
+        "list_id": "listJigyosho",
         "zIndexOffset": 40,
         "className": "jigyosho-icon"
     },
     "学童保育": {
-        "btn_id": "btnGakudou",
+        "list_id": "listGakudou",
         "zIndexOffset": 30,
         "className": "gakudou-icon"
     },
     "私立認可保育所": {
-        "btn_id": "btnPriNinka",
+        "list_id": "listPriNinka",
         "zIndexOffset": 20,
         "className": "prininka-icon"
     },
     "障害児通所支援事業": {
-        "btn_id": "btnDisability",
+        "list_id": "listDisability",
         "zIndexOffset": 10,
         "className": "disability-icon"
     }
