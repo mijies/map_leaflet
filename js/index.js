@@ -87,6 +87,32 @@ document.getElementById('mapid').addEventListener('click', _ => {
     }
 });
 
+Array.from(document.getElementsByClassName('filter-ul')).forEach(ul => {
+    Array.from(ul.children).forEach(li => {
+        if (!li.id.includes("Time")) {
+            li.addEventListener('click', _ => {
+                if (li.on) {
+                    li.on = false;
+                    li.style['background-color'] = "rgba(245,245,245,1.0)";
+                    return;
+                }
+                li.on = true;
+                li.style['background-color'] = "lightgray";
+            });
+            /* clickイベントのstyle書き換えでcssのhover無効への対処 */
+            li.addEventListener('mouseenter', _ => {
+                if (!li.on) li.style["background-color"] = "rgba(235,235,235,1.0)";
+            });
+            li.addEventListener('mouseleave', _ => {
+                if (!li.on) li.style["background-color"] = "rgba(245,245,245,1.0)";        
+            });
+        }
+    });
+});
+
+const thisOnOff = (obj) => {
+};
+
 
 // map.on('locationfound', e => {
 //     const [lat, lng] = [e.latlng.lat, e.latlng.lng];
