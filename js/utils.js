@@ -138,6 +138,7 @@ const menuResizeHandle = () => {
         } else {
             menuDiv.style.left = (window.innerWidth / 3 - 5) + "px";
         }
+        MENU_COLLAPSED = true;
     };
 
     const uncollapseMenu = () => {
@@ -149,6 +150,7 @@ const menuResizeHandle = () => {
         menuDiv.style.left = "50px";
         btnDiv.style.display = "none";
 
+        MENU_COLLAPSED = false;
         if (facilityList.clientHeight > 50) {
             collapseMenu();
         }
@@ -156,11 +158,11 @@ const menuResizeHandle = () => {
 
     return () => {
          // Windowサイズがメニューの幅より小さい場合(つまりメニューが複数行となる場合)
-        if (facilityList.clientHeight > 50) {
+        if (facilityList.clientHeight > 50 && !MENU_COLLAPSED) {
             collapseMenu();
             return;
         }
         // Windowサイズがメニューの幅より大きい場合
-        uncollapseMenu();
+        if (MENU_COLLAPSED) uncollapseMenu();
     };
 }

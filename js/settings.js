@@ -17,6 +17,7 @@ const INIT_ZOOM_LEVEL = 13;
 
 let RESIZE_TIMER; // Windowサイズの変更
 
+let MENU_COLLAPSED = false;
 const MENU_LIST = Array.from(document.getElementById("menu-div").querySelectorAll("li")); // メニューの全てのli要素
 
 let Nursery_Facilities;

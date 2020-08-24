@@ -22,7 +22,6 @@ L.control.locate({"keepCurrentZoomLevel": true}).addTo(map);
 // L.control.layers(TileLayersObjs).addTo(map);
 // map.removeControl();
 
-
 Array.from(document.getElementById('menu-facility-ul').children).forEach(li => {
     li.addEventListener('click', EVENT_HANDLE[li.id](li));
 
@@ -74,6 +73,18 @@ window.addEventListener('resize', _ => {
         clearTimeout(RESIZE_TIMER);
     }
     RESIZE_TIMER = setTimeout(menuResizer, 100);
+});
+
+document.getElementById('mapid').addEventListener('click', _ => {
+    // 検索ポップアップを隠す
+    document.getElementById('filter-popup-div').style.display ="none";
+
+    // メニューがCollapsedで開かれてる場合に隠す
+    if (MENU_COLLAPSED && MENU_LIST[0].style.display === "inline-block") {
+        MENU_LIST.forEach(list => {
+            list.style.display ="none";
+        });
+    }
 });
 
 
