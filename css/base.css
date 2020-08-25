@@ -73,6 +73,11 @@ html, body, #mapid {
     background-color: rgba(240,240,240,0.8);
 }
 
+#menu-facility-ul .cls-layer-off {
+    color: grey;
+    background-color: rgba(240,240,240,0.8);
+}
+
 #menu-div select {
     margin: 0;
     border: 0;
@@ -235,4 +240,11 @@ html, body, #mapid {
 }
 .filter-ul li:hover {
     background-color: rgba(235,235,235,1.0);
+}
+
+.filter-ul .cls-filter-on {
+    background-color: lightgrey;
+}
+.filter-ul .cls-filter-on:hover {
+    background-color: lightgrey; /* hover停止 */
 }

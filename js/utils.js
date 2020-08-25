@@ -16,34 +16,29 @@ const menuListFacilityClickEvent = (li) => {
     return () => {
         if (li.on) {
             map.removeLayer(NURSERY_LAYERS[li.id]);
-            li.style.color = "grey";
-            li.style["background-color"] = "rgba(240,240,240,0.8)";
             li.on = false;
+            li.classList.add('cls-layer-off');
             return;
         }
         map.addLayer(NURSERY_LAYERS[li.id]);
-        li.style.color = "white";
-        li.style["background-color"] = "";
         li.on = true;
+        li.classList.remove('cls-layer-off');
     };
 };
 
 const menuListSchoolClickEvent = (li) => {
-    li.style.color = "grey";
-    li.style["background-color"] = "rgba(240,240,240,0.8)";
     li.on = false;
+    li.classList.add('cls-layer-off');
     return () => {
         if (li.on) {
             map.removeLayer(SCHOOL_LAYERS[li.id]);
-            li.style.color = "grey";
-            li.style["background-color"] = "rgba(240,240,240,0.8)";
             li.on = false;
+            li.classList.add('cls-layer-off');
             return;
         }
         map.addLayer(SCHOOL_LAYERS[li.id]);
-        li.style.color = "";
-        li.style["background-color"] = "";
         li.on = true;
+        li.classList.remove('cls-layer-off');
     };
 };
 

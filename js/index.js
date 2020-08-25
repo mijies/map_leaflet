@@ -24,23 +24,6 @@ L.control.locate({"keepCurrentZoomLevel": true}).addTo(map);
 
 Array.from(document.getElementById('menu-facility-ul').children).forEach(li => {
     li.addEventListener('click', EVENT_HANDLE[li.id](li));
-
-    /* clickイベントのstyle書き換えでcssのhover無効への対処 */
-    li.addEventListener('mouseenter', _ => {
-        li.style.color = "lightblue";
-        if (!li.on) {
-            li.style.border = "groove white";
-            li.style["background-color"] = "rgba(240,240,240,0.8)";        
-        }
-    });
-    li.addEventListener('mouseleave', _ => {
-        li.style.color = "white";
-        if (!li.on) {
-            li.style.color = "grey";
-            li.style.border = "";
-            li.style["background-color"] = "rgba(240,240,240,0.8)";        
-        }
-    });
 });
 
 Array.from(document.getElementById('menu-control-ul').children).forEach(li => {
@@ -93,25 +76,28 @@ Array.from(document.getElementsByClassName('filter-ul')).forEach(ul => {
             li.addEventListener('click', _ => {
                 if (li.on) {
                     li.on = false;
-                    li.style['background-color'] = "rgba(245,245,245,1.0)";
+                    li.classList.remove('cls-filter-on');
                     return;
                 }
                 li.on = true;
-                li.style['background-color'] = "lightgray";
-            });
-            /* clickイベントのstyle書き換えでcssのhover無効への対処 */
-            li.addEventListener('mouseenter', _ => {
-                if (!li.on) li.style["background-color"] = "rgba(235,235,235,1.0)";
-            });
-            li.addEventListener('mouseleave', _ => {
-                if (!li.on) li.style["background-color"] = "rgba(245,245,245,1.0)";        
+                li.classList.add('cls-filter-on');
             });
         }
     });
 });
 
-const thisOnOff = (obj) => {
-};
+document.getElementById('filterApply').addEventListener('click', _ => {
+    // 新規園ボタンをオフ
+    $('#btnNewSchool').css('background-color', '#f6f6f6');
+    document.getElementById("btnNewSchool").enaled = false;
+
+    // メニューがCollapsedで開かれてる場合に隠す
+    if (MENU_COLLAPSED && MENU_LIST[0].style.display === "inline-block") {
+        MENU_LIST.forEach(list => {
+            list.style.display ="none";
+        });
+    }
+});
 
 
 // map.on('locationfound', e => {
