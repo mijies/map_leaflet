@@ -248,3 +248,15 @@ html, body, #mapid {
 .filter-ul .cls-filter-on:hover {
     background-color: lightgrey; /* hover停止 */
 }
+
+.filter-ul select {
+    margin: 0;
+    border: 0;
+    font-weight: bold;
+    vertical-align: middle;  /* alignment adjustment */
+    background-color: rgba(225, 255, 255, 0.0);
+    padding-bottom: 4px;
+}
+.filter-ul select:focus {
+    outline: none;
+}

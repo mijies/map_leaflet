@@ -27,6 +27,9 @@ const SCHOOL_LAYERS = {
     listMiddleSchool: null    // L.layerGroup([MiddleSchool, MiddleSchool_loc])
 };
 
+const OPEN_TIME_START = 7;
+const OPEN_TIME_END = 10;
+
 const STATION_MAP = new Map();
 let CURRENT_STATION_NAME = ""; // 最寄駅で選択されている駅名
 let CURRENT_STATION = null;  // 最寄駅で選択されているMarkerオブジェクト

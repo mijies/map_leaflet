@@ -22,15 +22,15 @@ L.control.locate({"keepCurrentZoomLevel": true}).addTo(map);
 // L.control.layers(TileLayersObjs).addTo(map);
 // map.removeControl();
 
-Array.from(document.getElementById('menu-facility-ul').children).forEach(li => {
+Array.from(document.getElementById('menu-facility-ul').children, li => {
     li.addEventListener('click', EVENT_HANDLE[li.id](li));
 });
 
-Array.from(document.getElementById('menu-control-ul').children).forEach(li => {
+Array.from(document.getElementById('menu-control-ul').children, li => {
     EVENT_HANDLE[li.id](li);
 });
 
-addSelectBoxOptions('selectBaseMap', Array.from(BaseTileMap.keys()).map(key => {
+addSelectBoxOptions('selectBaseMap', Array.from(BaseTileMap.keys(), key => {
     return {'value': key, 'text': key};
 }));
 
@@ -70,9 +70,9 @@ document.getElementById('mapid').addEventListener('click', _ => {
     }
 });
 
-Array.from(document.getElementsByClassName('filter-ul')).forEach(ul => {
-    Array.from(ul.children).forEach(li => {
-        if (!li.id.includes("Time")) {
+Array.from(document.getElementsByClassName('filter-ul'), ul => {
+    Array.from(ul.children, li => {
+        if (li.id) {
             li.addEventListener('click', _ => {
                 if (li.on) {
                     li.on = false;
@@ -84,6 +84,19 @@ Array.from(document.getElementsByClassName('filter-ul')).forEach(ul => {
             });
         }
     });
+});
+
+const OpenTimeList = [];
+for (let hour = OPEN_TIME_START; hour < OPEN_TIME_END; hour++) {
+    OpenTimeList.push({'value': hour + ':00', 'text': hour + ':00以前'});
+    OpenTimeList.push({'value': hour + ':15', 'text': hour + ':15以前'});
+    OpenTimeList.push({'value': hour + ':30', 'text': hour + ':30以前'});
+    OpenTimeList.push({'value': hour + ':45', 'text': hour + ':45以前'});
+}
+OpenTimeList.push({'value': OPEN_TIME_END + ':00', 'text': OPEN_TIME_END + ':00以前'});
+
+Array.from(document.getElementById("filter-popup-div").querySelectorAll("select"), slt => {
+    addSelectBoxOptions(slt.id, OpenTimeList);
 });
 
 document.getElementById('filterApply').addEventListener('click', _ => {
