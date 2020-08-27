@@ -27,8 +27,12 @@ const SCHOOL_LAYERS = {
     listMiddleSchool: null    // L.layerGroup([MiddleSchool, MiddleSchool_loc])
 };
 
+const FILTER_POPUP_DIV = document.getElementById('filter-popup-div');
+
 const OPEN_TIME_START = 7;
 const OPEN_TIME_END = 10;
+const CLOSE_TIME_START = 17;
+const CLOSE_TIME_END = 22;
 
 const STATION_MAP = new Map();
 let CURRENT_STATION_NAME = ""; // 最寄駅で選択されている駅名

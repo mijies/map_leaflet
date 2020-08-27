@@ -1,4 +1,23 @@
 
+const initializeMap = () => {
+    const map = L.map('mapid', {
+        // Map State Options
+        center: [INIT_LONGITUDE, INIT_LATITUDE],
+        maxBounds: setLatLngBounds(),
+        maxZoom: INIT_ZOOM_MAX,
+        minZoom: INIT_ZOOM_MIN,
+        zoom: INIT_ZOOM_LEVEL,
+        layers: BaseTileMap.get(INIT_MAP),
+        
+        // Interaction Options
+        bounceAtZoomLimits: false
+    });
+    L.control.scale({'imperial': false}).addTo(map);
+    L.control.locate({"keepCurrentZoomLevel": true}).addTo(map);
+
+    return map;
+};
+
 const setLatLngBounds = () => {
     return L.latLngBounds(
         L.latLng(SOUTH_BOUND, WEST_BOUND), L.latLng(NORTH_BOUND, EAST_BOUND)

@@ -70,18 +70,6 @@ const getNurseryPopupOptions = () => {
     };
 };
 
-const htmlTableBuilder = () => {
-    var content = '<table><tbody>';
-    const fn = (th, td) => {
-        content += '<tr>';
-        content += `<th>${th}</th>`;
-        content += `<td>${td}</td>`;
-        content += '</tr>';
-    }
-    fn.done = () => content += '</tbody></table>';
-    return fn;
-};
-
 const getNurseryPopupHtml = (feature) => {
     const p = feature.properties;
     let txt = `<b>${p.Name}</b></br>`;
