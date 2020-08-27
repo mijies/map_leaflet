@@ -40,7 +40,7 @@ const menuListNewSchoolEvent = (li) => {
     // TODO
 };
 
-const menuListBaseMapEvent = (li) => {
+const menuListBaseMapEvent = (_) => {
     document.getElementById('selectBaseMap').addEventListener('change', e => {
         for (const [key, tile] of BaseTileMap) {
             if (map.hasLayer(tile)) {
@@ -89,7 +89,7 @@ EVENT_HANDLE.listHelp = menuListHelpEvent;
 
 
 const addFilterSelectTimeOptions = (() => {
-    const OpenTimeList = [];
+    const OpenTimeList = [{'value': '', 'text': '開園'}];
     for (let hour = OPEN_TIME_START; hour < OPEN_TIME_END; hour++) {
         OpenTimeList.push({'value': hour + ':00', 'text': hour + ':00以前'});
         OpenTimeList.push({'value': hour + ':15', 'text': hour + ':15以前'});
@@ -98,7 +98,7 @@ const addFilterSelectTimeOptions = (() => {
     }
     OpenTimeList.push({'value': OPEN_TIME_END + ':00', 'text': OPEN_TIME_END + ':00以前'});
 
-    const CloseTimeList = [];
+    const CloseTimeList = [{'value': '', 'text': '閉園'}];
     for (let hour = CLOSE_TIME_START; hour < CLOSE_TIME_END; hour++) {
         CloseTimeList.push({'value': hour + ':00', 'text': hour + ':00以降'});
         CloseTimeList.push({'value': hour + ':30', 'text': hour + ':30以降'});

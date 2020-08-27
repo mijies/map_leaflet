@@ -4,7 +4,7 @@ const map = initializeMap();
 loadNurseryFacilities(map);
 loadSchools(map);
 loadStations(map);
-initializeDom();
+initializeDom(map);
 
 
 // map.on('locationfound', e => {

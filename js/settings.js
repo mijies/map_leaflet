@@ -28,6 +28,8 @@ const SCHOOL_LAYERS = {
 };
 
 const FILTER_POPUP_DIV = document.getElementById('filter-popup-div');
+const FILTER_POPUP_UL = document.getElementsByClassName('filter-ul');
+const FILTER_POPUP_SELECT = FILTER_POPUP_DIV.querySelectorAll("select");
 
 const OPEN_TIME_START = 7;
 const OPEN_TIME_END = 10;
