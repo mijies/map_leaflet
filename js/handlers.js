@@ -113,3 +113,19 @@ const addFilterSelectTimeOptions = (() => {
         addSelectBoxOptions(select.id, CloseTimeList);
     };
 })();
+
+
+const filterTime = (layerGroup, layerRemoved, item) => {
+    const [fHour, fMin] = item.value.split(':').map(s => Number(s));
+    Array.from(Object.values(layerGroup._layers), layer => {
+        const time = layer.feature.properties.Open;
+        if (time) {
+            const [hour, min] = time.split(':').map(s => Number(s));
+            if (hour * 60 + min <= fHour * 60 + fMin) return;
+        }
+        layerRemoved.push(layer);
+        layerGroup.removeLayer(layer);
+    });
+};
+
+FILTER_HANDLE.OpenTime = filterTime;

@@ -27,6 +27,7 @@ const SCHOOL_LAYERS = {
     listMiddleSchool: null    // L.layerGroup([MiddleSchool, MiddleSchool_loc])
 };
 
+const FILTER_HANDLE = {};
 const FILTER_POPUP_DIV = document.getElementById('filter-popup-div');
 const FILTER_POPUP_UL = document.getElementsByClassName('filter-ul');
 const FILTER_POPUP_SELECT = FILTER_POPUP_DIV.querySelectorAll("select");
@@ -41,6 +42,16 @@ let CURRENT_STATION_NAME = ""; // 最寄駅で選択されている駅名
 let CURRENT_STATION = null;  // 最寄駅で選択されているMarkerオブジェクト
 
 const NURSERY_LAYERS = {
+    listPubNinka: null,
+    listPriNinka: null,
+    listJigyosho: null,
+    listYhoiku: null,
+    listNinkagai: null,
+    listDisability: null,
+    listGakudou: null,
+    listKindergarten: null
+}
+const NURSERY_LAYERS_REMOVED = {
     listPubNinka: [],
     listPriNinka: [],
     listJigyosho: [],

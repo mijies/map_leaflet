@@ -77,10 +77,6 @@ const initializeFilter = (map) => {
     });
 
     document.getElementById('filterApply').addEventListener('click', _ => {
-        // 新規園ボタンをオフ
-        // $('#btnNewSchool').css('background-color', '#f6f6f6');
-        // document.getElementById("btnNewSchool").enaled = false;
-
         // メニューがCollapsedで開かれてる場合に隠す
         if (MENU_COLLAPSED && MENU_LIST[0].style.display === "inline-block") {
             MENU_LIST.forEach(list => {

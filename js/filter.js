@@ -21,8 +21,31 @@ class FilterManager {
         if (Object.keys(this.facObj).length === 0) return;
 
         // 全ての施設レイヤーを削除
-        Object.values(NURSERY_LAYERS).forEach(layer => map.removeLayer(layer));
+        MENU_LIST.forEach(li => {
+            if (li.on) { li.click(); } // TODO: 新規園がonで削除したレイヤーが復活しないか確認
+        });
 
+        Object.entries(this.facObj).forEach(([name, items]) => {
+            const lName = 'list' + name;
+            const layerGroup = NURSERY_LAYERS[lName];
+            const removed = NURSERY_LAYERS_REMOVED[lName];
+
+            // 絞り込みで除外されてるレイヤーがあれば戻す
+            if (removed.length) {
+                removed.forEach(layer => {
+                    layerGroup.addLayer(layer);
+                });
+                removed.length = 0;
+            }
+            Object.keys(items).forEach(key => {
+                FILTER_HANDLE[key](layerGroup, removed, items[key]);
+            });
+
+            if (layerGroup._layers.length) return;
+            MENU_LIST.forEach(li => {
+                if (li.id === lName) { li.click(); }
+            });    
+        });
     }
 
     addItem(item) {
