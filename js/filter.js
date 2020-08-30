@@ -32,7 +32,7 @@ class FilterManager {
 
         // 全ての施設レイヤーを削除
         MENU_LIST.forEach(li => {
-            if (li.on) { li.click(); } // TODO: 新規園がonで削除したレイヤーが復活しないか確認
+            if (li.on) li.click(); // TODO: 新規園がonで削除したレイヤーが復活しないか確認
         });
 
         Object.entries(this.facObj).forEach(([name, items]) => {

@@ -90,5 +90,21 @@ const initializeFilter = (map) => {
         fMgr = new FilterManager(map);
         fMgr.applyFilter();
     });
+
+    document.getElementById('filterReset').addEventListener('click', _ => {
+        for (const li of MENU_LIST) {
+            if (li.id in NURSERY_LAYERS) {
+                if (!NURSERY_LAYERS_REMOVED[li.id].length) {
+                    NURSERY_LAYERS_REMOVED[li.id].forEach(layer => {
+                        layerGroup.addLayer(layer);　// 絞り込みで除外されてるレイヤーがあれば戻す
+                    });
+                    NURSERY_LAYERS_REMOVED[li.id].length = 0;
+                }
+                if (!li.on) li.click();
+                continue;
+            }
+            if (li.on) li.click(); // TODO: 新規園がonで削除したレイヤーが復活しないか確認
+        }
+    });
 };
 
