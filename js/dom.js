@@ -28,6 +28,10 @@ const initializeDom = (map) => {
 };
 
 const initializeMenu = () => {
+    document.getElementById('filter-popup-close').addEventListener('click', _ => {
+        FILTER_POPUP_DIV.style.display ="none";
+    });
+
     Array.from(document.getElementById('menu-facility-ul').children, li => {
         li.addEventListener('click', EVENT_HANDLE[li.id](li));
     });
