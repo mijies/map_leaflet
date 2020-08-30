@@ -70,6 +70,10 @@ const getNurseryPopupOptions = () => {
     };
 };
 
+const isPropTrue = (prop) => {
+    return prop && prop !== 'N' && prop !== 'なし'
+};
+
 const getNurseryPopupHtml = (feature) => {
     const p = feature.properties;
     let txt = `<b>${p.Name}</b></br>`;
@@ -92,10 +96,10 @@ const getNurseryPopupHtml = (feature) => {
     if (p.Night)    {info += '夜間保育 '};
     if (p.H24)      {info += '24時間 '};
     if (p.Extra)    {info += '延長保育 '};
-    if (p['児童発達支援'])      {info += '児童発達支援 '};
-    if (p['重心（児童発達）'])   {info += `(${p['重心（児童発達）']})`};
-    if (p['放課後デイ'])        {info += '放課後デイ '};
-    if (p['重心（放課後デイ）']) {info += `(${p['重心（放課後デイ）']})`};
+    if (isPropTrue(p['児童発達支援']))      {info += '児童発達支援 '};
+    if (isPropTrue(p['重心（児童発達）']))   {info += `(${p['重心（児童発達）']})`};
+    if (isPropTrue(p['放課後デイ']))        {info += '放課後デイ '};
+    if (isPropTrue(p['重心（放課後デイ）'])) {info += `(${p['重心（放課後デイ）']})`};
 
     if (info) {
         table('', info);
@@ -133,15 +137,15 @@ const getNurseryPopupHtml = (feature) => {
         table('設立年度', p['設立年度']);
     }
 
-    if (p['プレ幼稚園']) {
+    if (isPropTrue(p['プレ幼稚園'])) {
         table('プレ幼稚園', (p['プレ幼稚園'] === 'Y') ? "あり" : "なし");
     }
 
-    if (p['園バス']) {
+    if (isPropTrue(p['園バス'])) {
         table('園バス', (p['園バス'] === 'Y') ? "あり" : "なし");
     }
 
-    if (p['給食']) {
+    if (isPropTrue(p['給食'])) {
         table('給食', p['給食']);
     }
 

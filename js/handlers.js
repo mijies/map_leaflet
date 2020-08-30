@@ -115,17 +115,45 @@ const addFilterSelectTimeOptions = (() => {
 })();
 
 
-const filterTime = (layerGroup, layerRemoved, item) => {
-    const [fHour, fMin] = item.value.split(':').map(s => Number(s));
-    Array.from(Object.values(layerGroup._layers), layer => {
-        const time = layer.feature.properties.Open;
-        if (time) {
-            const [hour, min] = time.split(':').map(s => Number(s));
-            if (hour * 60 + min <= fHour * 60 + fMin) return;
-        }
+const filterLayerGroup = (layerGroup, layerRemoved, prop, func) => {
+    for (layer of Object.values(layerGroup._layers)) {
+        if (func(layer.feature.properties[prop])) continue
         layerRemoved.push(layer);
         layerGroup.removeLayer(layer);
+    }
+};
+
+const filterOpenTime = (layerGroup, layerRemoved, item) => {
+    const [fHour, fMin] = item.value.split(':').map(s => Number(s));
+    filterLayerGroup(layerGroup, layerRemoved, 'Open', (time) => {
+        if (time) {
+            const [hour, min] = time.split(':').map(s => Number(s));
+            if (hour * 60 + min <= fHour * 60 + fMin) return true;
+        }
     });
 };
 
-FILTER_HANDLE.OpenTime = filterTime;
+const filterCloseTime = (layerGroup, layerRemoved, item) => {
+    const [fHour, fMin] = item.value.split(':').map(s => Number(s));
+    filterLayerGroup(layerGroup, layerRemoved, 'Close', (time) => {
+        if (time) {
+            let [hour, min] = time.split(':').map(s => Number(s));
+            if (hour <= 12) hour += 24 // 終園時間が翌日の場合
+            if (hour * 60 + min >= fHour * 60 + fMin) return true;
+        }
+    });
+};
+
+const filter24H = (layerGroup, layerRemoved, item) => {
+    const [fHour, fMin] = item.value.split(':').map(s => Number(s));
+    filterLayerGroup(layerGroup, layerRemoved, 'Close', (time) => {
+        if (time) {
+            let [hour, min] = time.split(':').map(s => Number(s));
+            if (hour <= 12) hour += 24 // 終園時間が翌日の場合
+            if (hour * 60 + min >= fHour * 60 + fMin) return true;
+        }
+    });
+};
+
+FILTER_HANDLE.OpenTime = filterOpenTime;
+FILTER_HANDLE.CloseTime = filterCloseTime;
