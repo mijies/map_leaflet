@@ -144,16 +144,26 @@ const filterCloseTime = (layerGroup, layerRemoved, item) => {
     });
 };
 
-const filter24H = (layerGroup, layerRemoved, item) => {
-    const [fHour, fMin] = item.value.split(':').map(s => Number(s));
-    filterLayerGroup(layerGroup, layerRemoved, 'Close', (time) => {
-        if (time) {
-            let [hour, min] = time.split(':').map(s => Number(s));
-            if (hour <= 12) hour += 24 // 終園時間が翌日の場合
-            if (hour * 60 + min >= fHour * 60 + fMin) return true;
-        }
-    });
+const filter24H = (layerGroup, layerRemoved, _) => {
+    filterLayerGroup(layerGroup, layerRemoved, 'H24', (value) => isPropTrue(value));
+};
+const filterIchijiHoiku = (layerGroup, layerRemoved, _) => {
+    filterLayerGroup(layerGroup, layerRemoved, 'Temp', (value) => isPropTrue(value));
+};
+const filterYakan = (layerGroup, layerRemoved, _) => {
+    filterLayerGroup(layerGroup, layerRemoved, 'Night', (value) => isPropTrue(value));
+};
+const filterKyujitu = (layerGroup, layerRemoved, _) => {
+    filterLayerGroup(layerGroup, layerRemoved, 'Holiday', (value) => isPropTrue(value));
+};
+const filterEncho = (layerGroup, layerRemoved, _) => {
+    filterLayerGroup(layerGroup, layerRemoved, 'Extra', (value) => isPropTrue(value));
 };
 
 FILTER_HANDLE.OpenTime = filterOpenTime;
 FILTER_HANDLE.CloseTime = filterCloseTime;
+FILTER_HANDLE.H24 = filter24H;
+FILTER_HANDLE.IchijiHoiku = filterIchijiHoiku;
+FILTER_HANDLE.Yakan = filterYakan;
+FILTER_HANDLE.Kyujitu = filterKyujitu;
+FILTER_HANDLE.Encho = filterEncho;

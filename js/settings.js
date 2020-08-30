@@ -47,7 +47,7 @@ const NURSERY_LAYERS = {
     listJigyosho: null,
     listYhoiku: null,
     listNinkagai: null,
-    listDisability: null,
+    listHandicap: null,
     listGakudou: null,
     listKindergarten: null
 }
@@ -57,7 +57,7 @@ const NURSERY_LAYERS_REMOVED = {
     listJigyosho: [],
     listYhoiku: [],
     listNinkagai: [],
-    listDisability: [],
+    listHandicap: [],
     listGakudou: [],
     listKindergarten: []
 }
@@ -101,8 +101,8 @@ const NURSERY_ICONS = {
         "className": "prininka-icon"
     },
     "障害児通所支援事業": {
-        "list_id": "listDisability",
+        "list_id": "listHandicap",
         "zIndexOffset": 10,
-        "className": "disability-icon"
+        "className": "handicap-icon"
     }
 }

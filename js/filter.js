@@ -5,6 +5,16 @@ class FilterManager {
         this.facNames = Object.keys(NURSERY_LAYERS).map(key => key.slice(4)); // key.slice(4)は 'list.*'のlistより後
     }
 
+    addItem(item) {
+        this.facNames.forEach(name => {
+            if (item.id.includes(name)) {
+                if (!(name in this.facObj)) this.facObj[name] = {}
+                this.facObj[name][item.id.replace(name, '')] = item;
+                return;
+            }
+        });
+    }
+
     applyFilter() {
         // 選択された開園終園時刻セレクトボックスの抽出
         Array.from(FILTER_POPUP_SELECT, select => {
@@ -41,20 +51,10 @@ class FilterManager {
                 FILTER_HANDLE[key](layerGroup, removed, items[key]);
             });
 
-            if (layerGroup._layers.length) return;
+            if (!Object.keys(layerGroup._layers).length) return;
             MENU_LIST.forEach(li => {
                 if (li.id === lName) { li.click(); }
             });    
-        });
-    }
-
-    addItem(item) {
-        this.facNames.forEach(name => {
-            if (item.id.includes(name)) {
-                if (!(name in this.facObj)) this.facObj[name] = {}
-                this.facObj[name][item.id.replace(name, '')] = item;
-                return;
-            }
         });
     }
 }

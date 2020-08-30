@@ -121,7 +121,7 @@ html, body, #mapid {
 	background-color: mediumblue;
 }
 
-#listDisability {
+#listHandicap {
 	background-color: salmon;
 }
 
@@ -185,7 +185,7 @@ html, body, #mapid {
     border-radius: 50%;
     background-color: greenyellow;
 }
-.disability-icon {
+.handicap-icon {
     padding: 10;
     border: 1px solid white;
     border-radius: 50%;
@@ -256,6 +256,7 @@ html, body, #mapid {
     vertical-align: middle;  /* alignment adjustment */
     background-color: rgba(225, 255, 255, 0.0);
     padding-bottom: 4px;
+    width: 48px;
 }
 .filter-ul select:focus {
     outline: none;
