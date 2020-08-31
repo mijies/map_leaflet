@@ -65,6 +65,9 @@ html, body, #mapid {
     color: black;
     background-color: white;
 }
+#menu-control-ul li .cls-layer-on {
+    color: red;
+}
 
 #menu-div #menu-ul #menu-facility-ul li:hover {
     color: lightblue;

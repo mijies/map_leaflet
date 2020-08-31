@@ -27,6 +27,7 @@ const SCHOOL_LAYERS = {
     listMiddleSchool: null    // L.layerGroup([MiddleSchool, MiddleSchool_loc])
 };
 
+let FMGR = null; // new filterManager(map);
 const FILTER_HANDLE = {};
 const FILTER_POPUP_DIV = document.getElementById('filter-popup-div');
 const FILTER_POPUP_UL = document.getElementsByClassName('filter-ul');

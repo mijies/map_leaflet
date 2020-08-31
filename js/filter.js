@@ -1,8 +1,8 @@
 class FilterManager {
     constructor(map) {
         this.map = map;
-        this.facObj = {};
         this.facNames = Object.keys(NURSERY_LAYERS).map(key => key.slice(4)); // key.slice(4)は 'list.*'のlistより後
+        this.facObj = null;
     }
 
     addItem(item) {
@@ -15,7 +15,9 @@ class FilterManager {
         });
     }
 
-    applyFilter() {
+    filterApply() {
+        this.facObj = {}; // 常にリセット ※this.facObjが確定済みならthis.filterLayer()
+
         // 選択された開園終園時刻セレクトボックスの抽出
         Array.from(FILTER_POPUP_SELECT, select => {
             if (select.value !== '開園' && select.value !== '閉園') {
@@ -29,7 +31,10 @@ class FilterManager {
 
         // 選択がなければ何もせずに終了
         if (Object.keys(this.facObj).length === 0) return;
+        this.filterLayer();
+    }
 
+    filterLayer() {
         // 全ての施設レイヤーを削除
         MENU_LIST.forEach(li => {
             if (li.on) li.click(); // TODO: 新規園がonで削除したレイヤーが復活しないか確認
@@ -54,7 +59,15 @@ class FilterManager {
             if (!Object.keys(layerGroup._layers).length) return;
             MENU_LIST.forEach(li => {
                 if (li.id === lName) { li.click(); }
-            });    
+            });
         });
+    }
+
+    filterNewSchool() {
+        this.facObj = {}; // 常にリセット ※this.facObjが確定済みならthis.filterLayer()
+        for (const name of this.facNames) {
+            this.facObj[name] = {NewSchool: null};
+        }
+        this.filterLayer();
     }
 }

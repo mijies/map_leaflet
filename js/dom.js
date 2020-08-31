@@ -60,6 +60,22 @@ const initializeMenu = () => {
 
 
 const initializeFilter = (map) => {
+    // 新設園ボタンをクリックした時のイベントの登録
+    document.getElementById('listNewSchool').addEventListener('click', e => {
+        const li = e.target;
+        if (li.on) {
+            li.on = false;
+            li.classList.remove('cls-layer-on');
+            document.getElementById('filterReset').click();
+            return;
+        }
+        document.getElementById('filterReset').click();
+        li.on = true;
+        li.classList.add('cls-layer-on');
+        FMGR = FMGR || new FilterManager(map);
+        FMGR.filterNewSchool();
+    }); 
+
     Array.from(FILTER_POPUP_UL, ul => {
         Array.from(ul.children, li => {
             if (li.id) {
@@ -87,16 +103,16 @@ const initializeFilter = (map) => {
                 list.style.display ="none";
             });
         }
-        fMgr = new FilterManager(map);
-        fMgr.applyFilter();
+        FMGR = FMGR || new FilterManager(map);
+        FMGR.filterApply();
     });
 
     document.getElementById('filterReset').addEventListener('click', _ => {
         for (const li of MENU_LIST) {
             if (li.id in NURSERY_LAYERS) {
-                if (!NURSERY_LAYERS_REMOVED[li.id].length) {
+                if (NURSERY_LAYERS_REMOVED[li.id].length) {
                     NURSERY_LAYERS_REMOVED[li.id].forEach(layer => {
-                        layerGroup.addLayer(layer);　// 絞り込みで除外されてるレイヤーがあれば戻す
+                        NURSERY_LAYERS[li.id].addLayer(layer);　// 絞り込みで除外されてるレイヤーがあれば戻す
                     });
                     NURSERY_LAYERS_REMOVED[li.id].length = 0;
                 }
@@ -105,6 +121,20 @@ const initializeFilter = (map) => {
             }
             if (li.on) li.click(); // TODO: 新規園がonで削除したレイヤーが復活しないか確認
         }
+        // 開園終園時刻セレクトボックスをデフォルトに戻す
+        Array.from(FILTER_POPUP_SELECT, select => {
+            if (select.id.includes('Open')) {
+                select.value = '開園';
+                return;
+            }
+            select.value = '閉園';
+        });
+        // 選択されてる項目を解除
+        Array.from(FILTER_POPUP_UL, ul => {
+            Array.from(ul.children, li => {
+                if (li.on) li.click();
+            });
+        });
     });
 };
 

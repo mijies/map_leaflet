@@ -160,6 +160,10 @@ const filterEncho = (layerGroup, layerRemoved, _) => {
     filterLayerGroup(layerGroup, layerRemoved, 'Extra', (value) => isPropTrue(value));
 };
 
+const filterNewSchool = (layerGroup, layerRemoved, _) => {
+    filterLayerGroup(layerGroup, layerRemoved, 'Name', (value) => value.includes('（新設・仮称）'));
+};
+
 FILTER_HANDLE.OpenTime = filterOpenTime;
 FILTER_HANDLE.CloseTime = filterCloseTime;
 FILTER_HANDLE.H24 = filter24H;
@@ -167,3 +171,4 @@ FILTER_HANDLE.IchijiHoiku = filterIchijiHoiku;
 FILTER_HANDLE.Yakan = filterYakan;
 FILTER_HANDLE.Kyujitu = filterKyujitu;
 FILTER_HANDLE.Encho = filterEncho;
+FILTER_HANDLE.NewSchool = filterNewSchool;
