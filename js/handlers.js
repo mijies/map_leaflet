@@ -37,7 +37,21 @@ const menuListFilterEvent = (li) => {
 };
 
 const menuListNewSchoolEvent = (li) => {
-    // TODO
+    li.addEventListener('click', _ => {
+        if (li.on) {
+            li.on = false; // リセット前であること
+            li.classList.remove('cls-layer-on');
+            document.getElementById('filterReset').click();
+            return;
+        }
+        document.getElementById('filterReset').click();
+        FMGR = FMGR || new FilterManager(map);
+        FMGR.filterNewSchool();
+        li.on = true; // リセットと新設園フィルター適用後であること
+        console.log(li.classList)
+        li.classList.add('cls-layer-on');
+        console.log(li.classList)
+    }); 
 };
 
 const menuListBaseMapEvent = (_) => {

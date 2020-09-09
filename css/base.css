@@ -65,9 +65,9 @@ html, body, #mapid {
     color: black;
     background-color: white;
 }
-#menu-control-ul li .cls-layer-on {
+/* #menu-div #menu-ul #menu-control-ul li .cls-layer-on {
     color: red;
-}
+} */
 
 #menu-div #menu-ul #menu-facility-ul li:hover {
     color: lightblue;
@@ -224,14 +224,48 @@ html, body, #mapid {
     cursor: pointer;
 }
 
+#nameKeyword {
+    border: inset 1px lightgray;   
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    height: 25px;
+    width: 230px;
+    font-size: 16px;
+}
+#nameKeyword, #btnNewSchool {
+    outline: none;
+}
+
+#btnNewSchool {
+    margin-left: 4px;
+    padding: 5px 10px 4px 10px;
+    border: solid 1px lightgray;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    font-size: 13px;
+    background-color: rgba(245,245,245,1.0);
+    cursor: pointer;
+}
+#filter-input-div .cls-filter-on {
+    color: red;
+}
+
 .filter-ul {
     margin:0;
     padding:0;
     list-style: none;
     border: solid 1px lightgray;
     border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
-  }
-.filter-ul li {
+}
+
+#filter-control-ul {
+    width: 284px;
+    margin:0;
+    padding:0;
+    list-style: none;
+    border: solid 1px lightgray;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+}
+
+.filter-ul li, #filter-control-ul li {
     display: table-cell;
     *display: inline-block;
     padding: 6px 10px 5px 10px;
@@ -240,17 +274,23 @@ html, body, #mapid {
     background-color: rgba(245,245,245,1.0);
     cursor: pointer;
 }
-.filter-ul li:not(:first-of-type) {
+.filter-ul li:not(:first-of-type),
+#filter-control-ul li:not(:first-of-type)
+{
     border-left: solid 1px lightgray;
 }
-.filter-ul li:hover {
+.filter-ul li:hover,
+#filter-control-ul li:hover,
+#btnNewSchool:hover
+{
     background-color: rgba(235,235,235,1.0);
 }
 
 .filter-ul .cls-filter-on {
     background-color: lightgrey;
 }
-.filter-ul .cls-filter-on:hover {
+.filter-ul .cls-filter-on:hover
+{
     background-color: lightgrey; /* hover停止 */
 }
 

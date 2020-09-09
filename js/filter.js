@@ -15,8 +15,8 @@ class FilterManager {
         });
     }
 
-    filterApply() {
-        this.facObj = {}; // 常にリセット ※this.facObjが確定済みならthis.filterLayer()
+    filterApply(facObj) {
+        this.facObj = facObj || {};
 
         // 選択された開園終園時刻セレクトボックスの抽出
         Array.from(FILTER_POPUP_SELECT, select => {
@@ -28,6 +28,12 @@ class FilterManager {
                 if (li.on) this.addItem(li);
             });
         });
+
+        // 新設園の指定がある場合
+        if (document.getElementById('btnNewSchool').on) {
+            this.filterNewSchool(this.facObj);
+            return;
+        }
 
         // 選択がなければ何もせずに終了
         if (Object.keys(this.facObj).length === 0) return;
@@ -63,8 +69,8 @@ class FilterManager {
         });
     }
 
-    filterNewSchool() {
-        this.facObj = {}; // 常にリセット ※this.facObjが確定済みならthis.filterLayer()
+    filterNewSchool(facObj) {
+        this.facObj = facObj || {};
         for (const name of this.facNames) {
             this.facObj[name] = {NewSchool: null};
         }

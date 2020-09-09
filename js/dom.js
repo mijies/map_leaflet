@@ -61,19 +61,15 @@ const initializeMenu = () => {
 
 const initializeFilter = (map) => {
     // 新設園ボタンをクリックした時のイベントの登録
-    document.getElementById('listNewSchool').addEventListener('click', e => {
-        const li = e.target;
-        if (li.on) {
-            li.on = false;
-            li.classList.remove('cls-layer-on');
-            document.getElementById('filterReset').click();
+    document.getElementById('btnNewSchool').addEventListener('click', e => {
+        const btn = e.target;
+        if (btn.on) {
+            btn.on = false;
+            btn.classList.remove('cls-filter-on');
             return;
         }
-        document.getElementById('filterReset').click();
-        li.on = true;
-        li.classList.add('cls-layer-on');
-        FMGR = FMGR || new FilterManager(map);
-        FMGR.filterNewSchool();
+        btn.on = true;
+        btn.classList.add('cls-filter-on');
     }); 
 
     Array.from(FILTER_POPUP_UL, ul => {
