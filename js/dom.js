@@ -61,8 +61,8 @@ const initializeMenu = () => {
 
 const initializeFilter = (map) => {
     // 新設園ボタンをクリックした時のイベントの登録
-    document.getElementById('btnNewSchool').addEventListener('click', e => {
-        const btn = e.target;
+    const btn = document.getElementById('btnNewSchool');
+    btn.addEventListener('click', _ => {
         if (btn.on) {
             btn.on = false;
             btn.classList.remove('cls-filter-on');
@@ -115,7 +115,7 @@ const initializeFilter = (map) => {
                 if (!li.on) li.click();
                 continue;
             }
-            if (li.on) li.click(); // TODO: 新規園がonで削除したレイヤーが復活しないか確認
+            if (li.on) li.click();
         }
         // 開園終園時刻セレクトボックスをデフォルトに戻す
         Array.from(FILTER_POPUP_SELECT, select => {
@@ -131,6 +131,10 @@ const initializeFilter = (map) => {
                 if (li.on) li.click();
             });
         });
+
+        // 新設園ボタンの選択解除
+        const btn = document.getElementById('btnNewSchool');
+        if (btn.on) btn.click();
     });
 };
 

@@ -37,13 +37,14 @@ class FilterManager {
 
         // 選択がなければ何もせずに終了
         if (Object.keys(this.facObj).length === 0) return;
+
         this.filterLayer();
     }
 
     filterLayer() {
         // 全ての施設レイヤーを削除
         MENU_LIST.forEach(li => {
-            if (li.on) li.click(); // TODO: 新規園がonで削除したレイヤーが復活しないか確認
+            if (li.on) li.click();
         });
 
         Object.entries(this.facObj).forEach(([name, items]) => {
@@ -71,9 +72,17 @@ class FilterManager {
 
     filterNewSchool(facObj) {
         this.facObj = facObj || {};
-        for (const name of this.facNames) {
-            this.facObj[name] = {NewSchool: null};
+
+        // 選択がなければ全ての施設が新設園の対象
+        if (!Object.keys(this.facObj).length) {
+            for (const name of this.facNames) {
+                this.facObj[name] = {};
+            }         
         }
+
+        Object.keys(this.facObj).forEach(name => {
+            this.facObj[name]["NewSchool"] = null;
+        });
         this.filterLayer();
     }
 }
