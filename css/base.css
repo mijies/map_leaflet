@@ -286,7 +286,9 @@ html, body, #mapid {
     background-color: rgba(235,235,235,1.0);
 }
 
-.filter-ul .cls-filter-on {
+.filter-ul .cls-filter-on,
+#filter-control-ul li #filteredList .cls-filter-on
+{
     background-color: lightgrey;
 }
 .filter-ul .cls-filter-on:hover

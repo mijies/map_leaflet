@@ -72,6 +72,17 @@ const initializeFilter = (map) => {
         btn.classList.add('cls-filter-on');
     }); 
 
+    const li = document.getElementById('filteredList');
+    li.addEventListener('click', _ => {
+        if (li.on) {
+            li.on = false;
+            li.classList.remove('cls-filter-on');
+            return;
+        }
+        li.on = true;
+        li.classList.add('cls-filter-on');
+    }); 
+
     Array.from(FILTER_POPUP_UL, ul => {
         Array.from(ul.children, li => {
             if (li.id) {
@@ -132,9 +143,17 @@ const initializeFilter = (map) => {
             });
         });
 
+        // 施設名キーワードテキストのクリア
+        const txt = document.getElementById('nameKeyword');
+        txt.value = '';
+
         // 新設園ボタンの選択解除
         const btn = document.getElementById('btnNewSchool');
         if (btn.on) btn.click();
+
+        // 検索一覧表示の解除
+        const li = document.getElementById('filteredList');
+        if (li.on) li.click();
     });
 };
 

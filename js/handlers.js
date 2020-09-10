@@ -137,8 +137,8 @@ const filterLayerGroup = (layerGroup, layerRemoved, prop, func) => {
     }
 };
 
-const filterOpenTime = (layerGroup, layerRemoved, item) => {
-    const [fHour, fMin] = item.value.split(':').map(s => Number(s));
+const filterOpenTime = (layerGroup, layerRemoved, value) => {
+    const [fHour, fMin] = value.split(':').map(s => Number(s));
     filterLayerGroup(layerGroup, layerRemoved, 'Open', (time) => {
         if (time) {
             const [hour, min] = time.split(':').map(s => Number(s));
@@ -147,8 +147,8 @@ const filterOpenTime = (layerGroup, layerRemoved, item) => {
     });
 };
 
-const filterCloseTime = (layerGroup, layerRemoved, item) => {
-    const [fHour, fMin] = item.value.split(':').map(s => Number(s));
+const filterCloseTime = (layerGroup, layerRemoved, value) => {
+    const [fHour, fMin] = value.split(':').map(s => Number(s));
     filterLayerGroup(layerGroup, layerRemoved, 'Close', (time) => {
         if (time) {
             let [hour, min] = time.split(':').map(s => Number(s));
@@ -174,6 +174,10 @@ const filterEncho = (layerGroup, layerRemoved, _) => {
     filterLayerGroup(layerGroup, layerRemoved, 'Extra', (value) => isPropTrue(value));
 };
 
+const filterNameKeyword = (layerGroup, layerRemoved, keyword) => {
+    filterLayerGroup(layerGroup, layerRemoved, 'Name', (value) => value.includes(keyword));
+};
+
 const filterNewSchool = (layerGroup, layerRemoved, _) => {
     filterLayerGroup(layerGroup, layerRemoved, 'Name', (value) => value.includes('（新設・仮称）'));
 };
@@ -185,4 +189,5 @@ FILTER_HANDLE.IchijiHoiku = filterIchijiHoiku;
 FILTER_HANDLE.Yakan = filterYakan;
 FILTER_HANDLE.Kyujitu = filterKyujitu;
 FILTER_HANDLE.Encho = filterEncho;
+FILTER_HANDLE.NameKeyword = filterNameKeyword;
 FILTER_HANDLE.NewSchool = filterNewSchool;
