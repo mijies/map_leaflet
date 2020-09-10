@@ -1,4 +1,14 @@
 
+const initializeGlobals = () => {
+    MENU_LIST = Array.from(document.getElementById("menu-div").querySelectorAll("li"));
+    
+    FILTER_POPUP_DIV = document.getElementById('filter-popup-div');
+    FILTER_POPUP_UL = document.getElementsByClassName('filter-ul');
+    FILTER_POPUP_SELECT = FILTER_POPUP_DIV.querySelectorAll("select");
+
+    STATION_MAP = new Map();
+};
+
 const initializeDom = (map) => {
     initializeMenu();
 

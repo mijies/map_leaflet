@@ -48,9 +48,7 @@ const menuListNewSchoolEvent = (li) => {
         FMGR = FMGR || new FilterManager(map);
         FMGR.filterNewSchool();
         li.on = true; // リセットと新設園フィルター適用後であること
-        console.log(li.classList)
         li.classList.add('cls-layer-on');
-        console.log(li.classList)
     }); 
 };
 
@@ -127,67 +125,3 @@ const addFilterSelectTimeOptions = (() => {
         addSelectBoxOptions(select.id, CloseTimeList);
     };
 })();
-
-
-const filterLayerGroup = (layerGroup, layerRemoved, prop, func) => {
-    for (layer of Object.values(layerGroup._layers)) {
-        if (func(layer.feature.properties[prop])) continue
-        layerRemoved.push(layer);
-        layerGroup.removeLayer(layer);
-    }
-};
-
-const filterOpenTime = (layerGroup, layerRemoved, value) => {
-    const [fHour, fMin] = value.split(':').map(s => Number(s));
-    filterLayerGroup(layerGroup, layerRemoved, 'Open', (time) => {
-        if (time) {
-            const [hour, min] = time.split(':').map(s => Number(s));
-            if (hour * 60 + min <= fHour * 60 + fMin) return true;
-        }
-    });
-};
-
-const filterCloseTime = (layerGroup, layerRemoved, value) => {
-    const [fHour, fMin] = value.split(':').map(s => Number(s));
-    filterLayerGroup(layerGroup, layerRemoved, 'Close', (time) => {
-        if (time) {
-            let [hour, min] = time.split(':').map(s => Number(s));
-            if (hour <= 12) hour += 24 // 終園時間が翌日の場合
-            if (hour * 60 + min >= fHour * 60 + fMin) return true;
-        }
-    });
-};
-
-const filter24H = (layerGroup, layerRemoved, _) => {
-    filterLayerGroup(layerGroup, layerRemoved, 'H24', (value) => isPropTrue(value));
-};
-const filterIchijiHoiku = (layerGroup, layerRemoved, _) => {
-    filterLayerGroup(layerGroup, layerRemoved, 'Temp', (value) => isPropTrue(value));
-};
-const filterYakan = (layerGroup, layerRemoved, _) => {
-    filterLayerGroup(layerGroup, layerRemoved, 'Night', (value) => isPropTrue(value));
-};
-const filterKyujitu = (layerGroup, layerRemoved, _) => {
-    filterLayerGroup(layerGroup, layerRemoved, 'Holiday', (value) => isPropTrue(value));
-};
-const filterEncho = (layerGroup, layerRemoved, _) => {
-    filterLayerGroup(layerGroup, layerRemoved, 'Extra', (value) => isPropTrue(value));
-};
-
-const filterNameKeyword = (layerGroup, layerRemoved, keyword) => {
-    filterLayerGroup(layerGroup, layerRemoved, 'Name', (value) => value.includes(keyword));
-};
-
-const filterNewSchool = (layerGroup, layerRemoved, _) => {
-    filterLayerGroup(layerGroup, layerRemoved, 'Name', (value) => value.includes('（新設・仮称）'));
-};
-
-FILTER_HANDLE.OpenTime = filterOpenTime;
-FILTER_HANDLE.CloseTime = filterCloseTime;
-FILTER_HANDLE.H24 = filter24H;
-FILTER_HANDLE.IchijiHoiku = filterIchijiHoiku;
-FILTER_HANDLE.Yakan = filterYakan;
-FILTER_HANDLE.Kyujitu = filterKyujitu;
-FILTER_HANDLE.Encho = filterEncho;
-FILTER_HANDLE.NameKeyword = filterNameKeyword;
-FILTER_HANDLE.NewSchool = filterNewSchool;

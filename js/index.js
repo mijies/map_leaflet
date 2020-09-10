@@ -1,6 +1,7 @@
 
 const map = initializeMap();
 
+initializeGlobals();
 loadNurseryFacilities(map);
 loadSchools(map);
 loadStations(map);
