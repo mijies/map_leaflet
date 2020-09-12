@@ -56,8 +56,8 @@ class FilterManager {
         // 選択がなければ何もせずに終了
         if (Object.keys(facObj).length === 0) return;
 
-        if (fl) this.filteredList(facObj);
         this.filterLayer(facObj);
+        if (fl) this.filteredList(facObj);
 
         // 検索ポップアップを隠す
         FILTER_POPUP_DIV.style.display ="none";
@@ -103,24 +103,38 @@ class FilterManager {
     }
 
     filteredList(facObj) {
-        // 検索結果の一覧を新規ブラウザタブで表示。
-        let urlQuery = '?';
-        Object.entries(facObj).forEach(([name, items]) => {
-            Object.keys(items).forEach(key => {
-                const value =  items[key] ? `::${items[key]}`  : "";
-                urlQuery += `${name}=${key}${value}&`;
-            });
+        let idx = sessionStorage.getItem('nextIdx') || '0';
+
+        // 同一idxの過去分があれば削除
+        Object.keys(sessionStorage).forEach(key => {
+            if (key[0] === idx) sessionStorage.removeItem(key);
         });
-        window.open(
-            'filteredList.html' + urlQuery.slice(0, -1) // クエリで検索条件を新規Windowへ渡す
-        );
+
+        Object.keys(facObj).forEach(key => {
+            for (const layer of Object.values(NURSERY_LAYERS['list' + key]._layers)) {
+                    sessionStorage.setItem(idx + layer.feature.properties.Name, "");
+            }
+        });
+        window.open('filteredList.html' + '?' + idx);  // 検索結果一覧の新規タブを開く
+        sessionStorage.setItem('nextIdx', ++idx % 10); // 暗黙の型変換、10回分まで保存とする
+
+        console.log(sessionStorage.getItem('nextIdx'))
+        console.log(Object.keys(sessionStorage));
     }
+        // 検索結果の一覧を新規ブラウザタブで表示。
+        
+        // Object.entries(facObj).forEach(([name, items]) => {
+        //     Object.keys(items).forEach(key => {
+        //         const value =  items[key] ? `::${items[key]}`  : "";
+        //         urlQuery += `${name}=${key}${value}&`;
+        //     });
+        // });
 
 }
 
 
 const filterLayerGroup = (layerGroup, layerRemoved, prop, func) => {
-    for (layer of Object.values(layerGroup._layers)) {
+    for (const layer of Object.values(layerGroup._layers)) {
         if (func(layer.feature.properties[prop])) continue
         layerRemoved.push(layer);
         layerGroup.removeLayer(layer);
