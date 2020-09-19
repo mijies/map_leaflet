@@ -1,7 +1,7 @@
 class FilterManager {
     constructor(map) {
         this.map = map;
-        this.facNames = Object.keys(NURSERY_LAYERS).map(key => key.slice(4)); // key.slice(4)は 'list.*'のlistより後
+        this.facNames = Object.keys(NURSERY_LAYERS);
     }
 
     addCond(facObj, id, value) {
@@ -78,9 +78,8 @@ class FilterManager {
         }
 
         Object.entries(facObj).forEach(([name, items]) => {
-            const lName = 'list' + name;
-            const layerGroup = NURSERY_LAYERS[lName];
-            const removed = NURSERY_LAYERS_REMOVED[lName];
+            const layerGroup = NURSERY_LAYERS[name];
+            const removed = NURSERY_LAYERS_REMOVED[name];
 
             // 絞り込みで除外されてるレイヤーがあれば戻す
             if (removed.length) {
@@ -96,7 +95,7 @@ class FilterManager {
             if (MENU_LIST) {
                 if (!Object.keys(layerGroup._layers).length) return;
                 MENU_LIST.forEach(li => {
-                    if (li.id === lName) { li.click(); }
+                    if (li.id === 'list' + name) { li.click(); }
                 });
             }
         });
@@ -111,25 +110,26 @@ class FilterManager {
         });
 
         Object.keys(facObj).forEach(key => {
-            for (const layer of Object.values(NURSERY_LAYERS['list' + key]._layers)) {
+            for (const layer of Object.values(NURSERY_LAYERS[key]._layers)) {
                     sessionStorage.setItem(idx + layer.feature.properties.Name, "");
             }
         });
+        // 検索条件
+        const conditions = [];
+        Object.entries(facObj).forEach(([name, items]) => {
+            Object.keys(items).forEach(key => {
+                const value =  items[key] ? `::${items[key]}`  : "";
+                urlQuery += `${name}=${key}${value}&`;
+            });
+        });
+        sessionStorage.setItem('conditions' + idx, conditions);
+
         window.open('filteredList.html' + '?' + idx);  // 検索結果一覧の新規タブを開く
         sessionStorage.setItem('nextIdx', ++idx % 10); // 暗黙の型変換、10回分まで保存とする
 
         console.log(sessionStorage.getItem('nextIdx'))
         console.log(Object.keys(sessionStorage));
     }
-        // 検索結果の一覧を新規ブラウザタブで表示。
-        
-        // Object.entries(facObj).forEach(([name, items]) => {
-        //     Object.keys(items).forEach(key => {
-        //         const value =  items[key] ? `::${items[key]}`  : "";
-        //         urlQuery += `${name}=${key}${value}&`;
-        //     });
-        // });
-
 }
 
 

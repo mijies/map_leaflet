@@ -3,12 +3,12 @@ const menuListFacilityClickEvent = (li) => {
     li.on = true;
     return () => {
         if (li.on) {
-            map.removeLayer(NURSERY_LAYERS[li.id]);
+            map.removeLayer(NURSERY_LAYERS[li.id.slice(4)]);
             li.on = false;
             li.classList.add('cls-layer-off');
             return;
         }
-        map.addLayer(NURSERY_LAYERS[li.id]);
+        map.addLayer(NURSERY_LAYERS[li.id.slice(4)]);
         li.on = true;
         li.classList.remove('cls-layer-off');
     };
@@ -82,14 +82,14 @@ const menuListStationEvent = (li) => {
     });
 };
 
-const menuListHelpEvent = (li) => {
+const menuListHelpEvent = (_) => {
     document.getElementById('listHelp').addEventListener('click', _ => {
         window.open('howto.html');
     });
 };
 
 Object.keys(NURSERY_LAYERS).forEach(key => {
-    EVENT_HANDLE[key] = menuListFacilityClickEvent;
+    EVENT_HANDLE['list' + key] = menuListFacilityClickEvent;
 });
 EVENT_HANDLE.listElementarySchool = menuListSchoolClickEvent;
 EVENT_HANDLE.listMiddleSchool = menuListSchoolClickEvent;

@@ -126,12 +126,13 @@ const initializeFilter = (map) => {
 
     document.getElementById('filterReset').addEventListener('click', _ => {
         for (const li of MENU_LIST) {
-            if (li.id in NURSERY_LAYERS) {
-                if (NURSERY_LAYERS_REMOVED[li.id].length) {
-                    NURSERY_LAYERS_REMOVED[li.id].forEach(layer => {
-                        NURSERY_LAYERS[li.id].addLayer(layer);　// 絞り込みで除外されてるレイヤーがあれば戻す
+            const id = li.id.slice(4);
+            if (id in NURSERY_LAYERS) {
+                if (NURSERY_LAYERS_REMOVED[id].length) {
+                    NURSERY_LAYERS_REMOVED[id].forEach(layer => {
+                        NURSERY_LAYERS[id].addLayer(layer);　// 絞り込みで除外されてるレイヤーがあれば戻す
                     });
-                    NURSERY_LAYERS_REMOVED[li.id].length = 0;
+                    NURSERY_LAYERS_REMOVED[id].length = 0;
                 }
                 if (!li.on) li.click();
                 continue;

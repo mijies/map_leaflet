@@ -12,6 +12,7 @@ const main = () => {
     loadJSON('data/nurseryFacilities.geojson', response => {
         filterNurseryFacilities(JSON.parse(response), names);
     });
+    renderFilterConditions(idx);
 };
 
 const filterNurseryFacilities = (geojson, names) => {
@@ -125,6 +126,19 @@ class TableList {
         document.getElementById("filteredList").appendChild(this.table);
     }
 }
+
+const renderFilterConditions = (idx) => {
+    const fd = document.getElementById("filterCondition");
+    fd.textContent = '絞り込み条件 : ';
+    fd.appendChild(document.createElement('br'));
+
+    sessionStorage.getItem('conditions' + idx).split(',').forEach(item => {
+        const span = document.createElement('span');
+        span.textContent = item;
+        fd.appendChild(span);
+        fd.appendChild(document.createElement('br'));
+    });
+};
 
 // urlでクエリが渡されていれば実行
 if(location.search) main();

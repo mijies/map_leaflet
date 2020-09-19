@@ -1,19 +1,18 @@
 
 loadNurseryFacilities = (map) => {
     loadJSON('data/nurseryFacilities.geojson', response => {
-        Nursery_Facilities = JSON.parse(response);
-        AddNurseryLayers(Nursery_Facilities, map);
+        NURSERY_FACILITIES = JSON.parse(response);
+        AddNurseryLayers(NURSERY_FACILITIES, map);
     });
 };
 
 // TODO: Create Marker Object directly could be faster
-const AddNurseryLayers = (Nursery_Facilities, map) => {
+const AddNurseryLayers = (NURSERY_FACILITIES, map) => {
     // layers for each facility type
-    Object.keys(NURSERY_ICONS).forEach(type => {
-        NURSERY_LAYERS[NURSERY_ICONS[type].list_id] = L.geoJSON(
-            Nursery_Facilities, nurseryGeoJSONOptions(type)).addTo(map);
+    Object.keys(NURSERY_TYPES).forEach(type => {
+        NURSERY_LAYERS[NURSERY_TYPES[type].id] = L.geoJSON(
+            NURSERY_FACILITIES, nurseryGeoJSONOptions(type)).addTo(map);
     });
-    // for 
 }
 
 loadSchools = (map) => {

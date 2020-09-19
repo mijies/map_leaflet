@@ -19,14 +19,47 @@ let RESIZE_TIMER; // Windowサイズの変更
 let MENU_COLLAPSED = false;
 let MENU_LIST; // menu-divの全てのli要素
 
-let Nursery_Facilities;
+let NURSERY_FACILITIES;
+
+const NURSERY_MAP = new Map([ // Mapオブジェクトは順序保証あり ※上から施設数が少ない順
+    ["PubNinka", "公立認可保育所"],
+    ["Yhoiku", "横浜保育室"],
+    ["Kindergarten", "幼稚園"],
+    ["Ninkagai", "可外保育施設"],
+    ["Jigyosho", "小規模・事業所内保育事業"],
+    ["Gakudou", "学童保育"],
+    ["PriNinka", "私立認可保育所"],
+    ["Handicap", "障害児通所支援事業"]
+]);
+
+const NURSERY_LAYERS = {};
+const NURSERY_LAYERS_REMOVED = {};
+const NURSERY_TYPES = {};
+
+let zIdx = 80;
+for (let [key, type] of NURSERY_MAP.entries()) {
+    NURSERY_LAYERS[key] = null;
+    NURSERY_LAYERS_REMOVED[key] = [];
+    NURSERY_TYPES[type] = {
+        id: key,
+        zIndexOffset: zIdx,
+        className: key.toLowerCase() + "-icon"      
+    };
+    zIdx -= 10;
+}
 
 const SCHOOL_LAYERS = {
     listElementarySchool: null,
     listMiddleSchool: null    // L.layerGroup([MiddleSchool, MiddleSchool_loc])
 };
 
-let FMGR = null; // new filterManager(map);
+let STATION_MAP;
+let CURRENT_STATION_NAME = ""; // 最寄駅で選択されている駅名
+let CURRENT_STATION = null;  // 最寄駅で選択されているMarkerオブジェクト
+
+
+const EVENT_HANDLE = {};
+
 const FILTER_HANDLE = {};
 let FILTER_POPUP_DIV;
 let FILTER_POPUP_UL;
@@ -37,69 +70,4 @@ const OPEN_TIME_END = 10;
 const CLOSE_TIME_START = 17;
 const CLOSE_TIME_END = 22;
 
-let STATION_MAP;
-let CURRENT_STATION_NAME = ""; // 最寄駅で選択されている駅名
-let CURRENT_STATION = null;  // 最寄駅で選択されているMarkerオブジェクト
-
-const NURSERY_LAYERS = {
-    listPubNinka: null,
-    listPriNinka: null,
-    listJigyosho: null,
-    listYhoiku: null,
-    listNinkagai: null,
-    listHandicap: null,
-    listGakudou: null,
-    listKindergarten: null
-}
-
-const NURSERY_LAYERS_REMOVED = {};
-Object.keys(NURSERY_LAYERS).forEach(key => {
-    NURSERY_LAYERS_REMOVED[key] = [];
-});
-
-
-
-const EVENT_HANDLE = {};
-
-const NURSERY_ICONS = {
-    公立認可保育所: {
-        list_id: "listPubNinka",
-        zIndexOffset: 80,
-        className:"pubninka-icon"
-    },
-    横浜保育室: {
-        list_id: "listYhoiku",
-        "zIndexOffset": 70,
-        "className": "yhoiku-icon"
-    },   
-    幼稚園: {
-        "list_id": "listKindergarten",
-        "zIndexOffset": 60,
-        "className": "kindergarten-icon"
-    },
-    可外保育施設: {
-        "list_id": "listNinkagai",
-        "zIndexOffset": 50,
-        "className": "ninkagai-icon"
-    },
-    "小規模・事業所内保育事業": {
-        "list_id": "listJigyosho",
-        "zIndexOffset": 40,
-        "className": "jigyosho-icon"
-    },
-    学童保育: {
-        "list_id": "listGakudou",
-        "zIndexOffset": 30,
-        "className": "gakudou-icon"
-    },
-    私立認可保育所: {
-        "list_id": "listPriNinka",
-        "zIndexOffset": 20,
-        "className": "prininka-icon"
-    },
-    障害児通所支援事業: {
-        "list_id": "listHandicap",
-        "zIndexOffset": 10,
-        "className": "handicap-icon"
-    }
-}
+let FMGR = null; // new filterManager(map);
