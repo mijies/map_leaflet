@@ -42,6 +42,7 @@ class TableList {
         this.thead = document.createElement('thead');
         this.tbody = document.createElement('tbody');
         this.createThead();
+        this.table.classList.add('table');
     }
 
     createThead() {
@@ -87,7 +88,7 @@ class TableList {
             info.push('FAX ' + p.FAX);
         }
         if(p.url) {
-            var aTag = document.createElement('a');
+            const aTag = document.createElement('a');
             aTag.setAttribute('href', p.url);
             aTag.setAttribute('target','_blank');
             aTag.textContent = '施設のWebサイトを開く';
