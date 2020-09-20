@@ -71,3 +71,13 @@ const CLOSE_TIME_START = 17;
 const CLOSE_TIME_END = 22;
 
 let FMGR = null; // new filterManager(map);
+
+const FILTER_COND = {
+	OpenTime: '開園',
+	CloseTime: '終園',
+	H24: '24時間',
+	IchijiHoiku: '一時保育',
+	Yakan: '夜間',
+	Kyujitu: '休日',
+	Encho: '延長保育'
+};

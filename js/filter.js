@@ -49,7 +49,7 @@ class FilterManager {
         // 新設園の指定がある場合
         if (document.getElementById('btnNewSchool').on) {
             this.filterNewSchool(facObj);
-            if (fl) this.filteredList(facObj);
+            if (fl) this.filteredList(facObj, kw, true); // 新設園: true
             return;
         }
 
@@ -57,7 +57,7 @@ class FilterManager {
         if (Object.keys(facObj).length === 0) return;
 
         this.filterLayer(facObj);
-        if (fl) this.filteredList(facObj);
+        if (fl) this.filteredList(facObj, kw, false); // 新設園: false
 
         // 検索ポップアップを隠す
         FILTER_POPUP_DIV.style.display ="none";
@@ -101,7 +101,7 @@ class FilterManager {
         });
     }
 
-    filteredList(facObj) {
+    filteredList(facObj, kw, ns) { // kw:施設名キーワード, ns:新設園
         let idx = sessionStorage.getItem('nextIdx') || '0';
 
         // 同一idxの過去分があれば削除
@@ -114,21 +114,29 @@ class FilterManager {
                     sessionStorage.setItem(idx + layer.feature.properties.Name, "");
             }
         });
-        // 検索条件
-        const conditions = [];
-        Object.entries(facObj).forEach(([name, items]) => {
-            Object.keys(items).forEach(key => {
-                const value =  items[key] ? `::${items[key]}`  : "";
-                urlQuery += `${name}=${key}${value}&`;
-            });
-        });
-        sessionStorage.setItem('conditions' + idx, conditions);
 
+        this.filterConditionList(facObj, idx, kw, ns);              // 検索条件一覧
         window.open('filteredList.html' + '?' + idx);  // 検索結果一覧の新規タブを開く
         sessionStorage.setItem('nextIdx', ++idx % 10); // 暗黙の型変換、10回分まで保存とする
+    }
 
-        console.log(sessionStorage.getItem('nextIdx'))
-        console.log(Object.keys(sessionStorage));
+    filterConditionList(facObj, idx, kw, ns) { // kw:施設名キーワード, ns:新設園
+        const conditions = [];
+        if (ns) conditions.push('- 新規園（適用）');
+        if (kw) conditions.push(`- 施設名キーワード（${kw}）`);
+        Object.entries(facObj).forEach(([name, items]) => {
+            const cond = [];
+            Object.keys(items).forEach(key => {
+                if (!(key in FILTER_COND)) return;
+                cond.push(
+                    items[key] 
+                    ? FILTER_COND[key] + items[key]
+                    : FILTER_COND[key]
+                );
+            });
+            conditions.push(`- ${NURSERY_MAP.get(name)}（${cond.join('、')}）`);
+        });
+        sessionStorage.setItem('conditions' + idx, conditions.join(','));
     }
 }
 

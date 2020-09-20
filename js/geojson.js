@@ -44,7 +44,7 @@ const nurseryGeoJSONOptions = (type) => {
 };
 
 const nurseryStyleFunction = (type) => {
-    const style = NURSERY_ICONS[type]
+    const style = NURSERY_TYPES[type]
     return (feature, coordinates) => {
         return L.marker(coordinates, {
             icon: L.icon({
