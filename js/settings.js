@@ -42,7 +42,7 @@ for (let [key, type] of NURSERY_MAP.entries()) {
     NURSERY_LAYERS_REMOVED[key] = [];
     NURSERY_TYPES[type] = {
         id: key,
-        zIndexOffset: zIdx,
+        zIndexOffset: zIdx, // 施設アイコンの重なりの調整
         className: key.toLowerCase() + "-icon"      
     };
     zIdx -= 10;

@@ -1,4 +1,105 @@
 
+const menuListFacilityClickEvent = (li) => {
+    li.on = true;
+    return () => {
+        if (li.on) {
+            map.removeLayer(NURSERY_LAYERS[li.id.slice(4)]);
+            li.on = false;
+            li.classList.add('cls-layer-off');
+            return;
+        }
+        map.addLayer(NURSERY_LAYERS[li.id.slice(4)]);
+        li.on = true;
+        li.classList.remove('cls-layer-off');
+    };
+};
+
+const menuListSchoolClickEvent = (li) => {
+    li.on = false;
+    li.classList.add('cls-layer-off');
+    return () => {
+        if (li.on) {
+            map.removeLayer(SCHOOL_LAYERS[li.id]);
+            li.on = false;
+            li.classList.add('cls-layer-off');
+            return;
+        }
+        map.addLayer(SCHOOL_LAYERS[li.id]);
+        li.on = true;
+        li.classList.remove('cls-layer-off');
+    };
+};
+
+const menuListFilterEvent = (li) => {
+    li.addEventListener('click', _ => {
+        FILTER_POPUP_DIV.style.display = "block";
+    });
+};
+
+const menuListNewSchoolEvent = (li) => {
+    li.addEventListener('click', _ => {
+        if (li.on) {
+            li.on = false; // リセット前であること
+            li.classList.remove('cls-layer-on');
+            document.getElementById('filterReset').click();
+            return;
+        }
+        document.getElementById('filterReset').click();
+        FMGR = FMGR || new FilterManager(map);
+        FMGR.filterNewSchool();
+        li.on = true; // リセットと新設園フィルター適用後であること
+        li.classList.add('cls-layer-on');
+    }); 
+};
+
+const menuListBaseMapEvent = (_) => {
+    document.getElementById('selectBaseMap').addEventListener('change', e => {
+        for (const [key, tile] of BaseTileMap) {
+            if (map.hasLayer(tile)) {
+                if (key === e.target.value) return;
+                map.removeLayer(tile);
+            }       
+        }
+        map.addLayer(BaseTileMap.get(e.target.value));
+    });
+};
+
+const menuListStationEvent = (li) => {
+    document.getElementById('selectStation').addEventListener('change', e => {
+        if (CURRENT_STATION_NAME === e.target.value) return;
+        if (CURRENT_STATION) map.removeLayer(CURRENT_STATION);
+        for (const stations of STATION_MAP.values()) {
+            stations.forEach(station => {
+                if (station.name === e.target.value) {
+                    const latLng = [station.lat, station.lng];
+                    CURRENT_STATION_NAME = station.name;
+                    CURRENT_STATION = L.marker(latLng, {zIndexOffset: 200}).addTo(map);
+                    map.setView(latLng);
+                    return;
+                }
+            });
+        }
+    });
+};
+
+const menuListHelpEvent = (_) => {
+    document.getElementById('listHelp').addEventListener('click', _ => {
+        window.open('howto.html');
+    });
+};
+
+Object.keys(NURSERY_LAYERS).forEach(key => {
+    EVENT_HANDLE['list' + key] = menuListFacilityClickEvent;
+});
+EVENT_HANDLE.listElementarySchool = menuListSchoolClickEvent;
+EVENT_HANDLE.listMiddleSchool = menuListSchoolClickEvent;
+EVENT_HANDLE.listFilter = menuListFilterEvent;
+EVENT_HANDLE.listNewSchool = menuListNewSchoolEvent;
+EVENT_HANDLE.listSelectBaseMap = menuListBaseMapEvent;
+EVENT_HANDLE.listSelectStation = menuListStationEvent;
+EVENT_HANDLE.listHelp = menuListHelpEvent;
+
+
 const loadJSON = (data_path, callback) => {
     let xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");

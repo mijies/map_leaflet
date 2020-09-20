@@ -203,3 +203,30 @@ FILTER_HANDLE.Kyujitu = filterKyujitu;
 FILTER_HANDLE.Encho = filterEncho;
 FILTER_HANDLE.NameKeyword = filterNameKeyword;
 FILTER_HANDLE.NewSchool = filterNewSchool;
+
+const addFilterSelectTimeOptions = (() => {
+    const OpenTimeList = [{'value': '', 'text': '開園'}];
+    for (let hour = OPEN_TIME_START; hour < OPEN_TIME_END; hour++) {
+        OpenTimeList.push({'value': hour + ':00', 'text': hour + ':00以前'});
+        OpenTimeList.push({'value': hour + ':15', 'text': hour + ':15以前'});
+        OpenTimeList.push({'value': hour + ':30', 'text': hour + ':30以前'});
+        OpenTimeList.push({'value': hour + ':45', 'text': hour + ':45以前'});
+    }
+    OpenTimeList.push({'value': OPEN_TIME_END + ':00', 'text': OPEN_TIME_END + ':00以前'});
+
+    const CloseTimeList = [{'value': '', 'text': '閉園'}];
+    for (let hour = CLOSE_TIME_START; hour < CLOSE_TIME_END; hour++) {
+        CloseTimeList.push({'value': hour + ':00', 'text': hour + ':00以降'});
+        CloseTimeList.push({'value': hour + ':30', 'text': hour + ':30以降'});
+    }
+    CloseTimeList.push({'value': CLOSE_TIME_END + ':00', 'text': CLOSE_TIME_END + ':00以前'});
+
+    return (select) => {
+        if (select.id.includes('Open')) {
+            addSelectBoxOptions(select.id, OpenTimeList);
+            return;
+        }
+        addSelectBoxOptions(select.id, CloseTimeList);
+    };
+})();
+
