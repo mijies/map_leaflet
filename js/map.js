@@ -195,7 +195,7 @@ const loadStations = (map) => {
             const s = `${p.N05_003} (${p.N05_002})`;
             if (!STATION_MAP.has(s)) STATION_MAP.set(s, []);
             STATION_MAP.get(s).push({
-                name: p.N05_011,
+                name: p.N05_001 + p.N05_011, // N05_001は一桁の想定
                 lat: f.geometry.coordinates[1],
                 lng: f.geometry.coordinates[0]
             });
@@ -216,7 +216,7 @@ const addStationSelectboxOptions = () => {
         STATION_MAP.get(key).forEach(data => {
             const option = document.createElement("option");
             option.value = data.name;
-            option.text = data.name;
+            option.text = data.name.slice(1); // N05_011のみ
             optGrp.appendChild(option);
         });
         select.appendChild(optGrp);

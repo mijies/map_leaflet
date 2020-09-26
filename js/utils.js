@@ -68,6 +68,7 @@ const menuListStationEvent = (li) => {
     document.getElementById('selectStation').addEventListener('change', e => {
         if (CURRENT_STATION_NAME === e.target.value) return;
         if (CURRENT_STATION) map.removeLayer(CURRENT_STATION);
+        if ('最寄駅' === e.target.value) return;
         for (const stations of STATION_MAP.values()) {
             stations.forEach(station => {
                 if (station.name === e.target.value) {
