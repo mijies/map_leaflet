@@ -24,6 +24,13 @@ const setLatLngBounds = () => {
     );
 };
 
+const meterPerPixel = (latLng) => {
+    // 地球の外周 x 絶対値(Cosine( -π/2 < 緯度 < π/2 )) / zoomレベルによる比率 ※π/2は90度
+    // zoomレベルごとに距離が2倍となるため、2**zoomレベルで割る
+    // zoomレベル0で256(2**8)pixelで地球一周のため、2**8で割る  -> zoomレベルと併せてmap.getZoom() + 8
+    return 40075016.686 * Math.abs(Math.cos(latLng.lat * Math.PI / 180)) / Math.pow(2, map.getZoom() + 8);
+};
+
 const BaseTileMap = new Map([ // leaflet無関係のJSのMapオブジェクト
     ["標準(Bing)", new L.BingLayer(BING_API_KEY, {'type': 'Road'})],
     ["標準(OSM)", L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {

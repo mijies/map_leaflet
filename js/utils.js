@@ -83,6 +83,23 @@ const menuListStationEvent = (li) => {
     });
 };
 
+const menuListCircle = (_) => {
+    document.getElementById('selectCircle').addEventListener('change', e => {
+        const radius = e.target.value;
+        if (CURRENT_CIRCLE.radius === radius) return;
+        if (CURRENT_CIRCLE.marker) map.removeLayer(CURRENT_CIRCLE.marker);
+        CURRENT_CIRCLE.radius = null;
+        if ('円消去' === radius) return;
+        const latLng = map.getCenter();
+        CURRENT_CIRCLE.marker = L.circleMarker(latLng, {
+            'radius': Math.floor(radius / meterPerPixel(latLng)),
+            'weight': 0,
+            'color': 'red',
+        }).addTo(map);
+        CURRENT_CIRCLE.radius = radius;
+    });
+};
+
 const menuListHelpEvent = (_) => {
     document.getElementById('listHelp').addEventListener('click', _ => {
         window.open('howto.html');
@@ -98,6 +115,7 @@ EVENT_HANDLE.listFilter = menuListFilterEvent;
 EVENT_HANDLE.listNewSchool = menuListNewSchoolEvent;
 EVENT_HANDLE.listSelectBaseMap = menuListBaseMapEvent;
 EVENT_HANDLE.listSelectStation = menuListStationEvent;
+EVENT_HANDLE.listSelectCircle = menuListCircle;
 EVENT_HANDLE.listHelp = menuListHelpEvent;
 
 

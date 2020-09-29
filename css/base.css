@@ -98,6 +98,9 @@ html, body, #mapid {
 #menu-div #selectStation {
     width: 65px;
 }
+#menu-div #selectCircle {
+    width: 65px;
+}
 
 #menu-div ul li ul #listHelp {
     padding-bottom: 5px;

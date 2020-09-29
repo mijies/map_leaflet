@@ -57,6 +57,10 @@ let STATION_MAP;
 let CURRENT_STATION_NAME = ""; // 最寄駅で選択されている駅名
 let CURRENT_STATION = null;  // 最寄駅で選択されているMarkerオブジェクト
 
+const CURRENT_CIRCLE = {  // 円表示で選択されているMarkerオブジェクト
+    radius: null,
+    marker: null
+};
 
 const EVENT_HANDLE = {};
 
