@@ -1,0 +1,134 @@
+#menu-btn-div, #menu-div {
+    position: fixed;
+    top: 0;  
+    z-index: 2;
+	padding: 0;
+	margin: 0;
+}
+
+#menu-btn-div {
+    display: none;
+    top: 2px;
+    right: 7px;
+}
+
+#menu-btn {
+    background-color: white;
+	border: groove white;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    padding: 5px 8px 5px 8px;
+    margin: 0;
+}
+#menu-btn:hover {
+	background-color: lightblue;
+}
+
+#menu-div {
+    left: 50px;
+}
+
+#menu-div ul {
+    padding: 0;
+    margin: 0;
+    /* letter-spacing: -0.5em; */
+    font-size: 0;
+}
+
+#menu-div ul li {
+    display: inline-block;
+    margin: 0;
+}
+
+#menu-div #menu-ul ul li {
+    color: white;
+	border: groove white;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    padding: 5px 8px 5px 8px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+#menu-div #menu-ul #menu-control-ul li {
+    color: black;
+    background-color: white;
+}
+/* #menu-div #menu-ul #menu-control-ul li .cls-layer-on {
+    color: red;
+} */
+
+#menu-div #menu-ul #menu-facility-ul li:hover {
+    color: lightblue;
+}
+#menu-div #menu-ul #menu-control-ul li:hover {
+    background-color: rgba(240,240,240,0.8);
+}
+
+#menu-facility-ul .cls-layer-off {
+    color: grey;
+    background-color: rgba(240,240,240,0.8);
+}
+
+#menu-div select {
+    margin: 0;
+    border: 0;
+    font-weight: bold;
+    vertical-align: middle;  /* alignment adjustment */
+    background-color: rgba(225, 255, 255, 0.0);
+    padding-bottom: 4px;
+}
+#menu-div select:focus {
+    outline: none;
+}
+#menu-div #selectBaseMap {
+    width: 50px;
+}
+#menu-div #selectStation {
+    width: 65px;
+}
+#menu-div #selectCircle {
+    width: 65px;
+}
+
+#menu-div ul li ul #listHelp {
+    padding-bottom: 5px;
+}
+
+
+#listPubNinka {
+	background-color: green;
+}
+
+#listPriNinka {
+	background-color: greenyellow;
+}
+
+#listJigyosho {
+	background-color: mediumpurple;
+}
+
+#listYhoiku {
+	background-color: dodgerblue;
+}
+
+#listNinkagai {
+	background-color: mediumblue;
+}
+
+#listHandicap {
+	background-color: salmon;
+}
+
+#listGakudou {
+	background-color: darkgoldenrod;
+}
+
+#listKindergarten {
+	background-color: red;
+}
+
+#listElementarySchool {
+	background-color: green;
+}
+#listMiddleSchool {
+	background-color: grey;
+}
