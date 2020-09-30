@@ -68,7 +68,7 @@
     border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
 }
 
-.filter-ul li, #filter-control-ul li {
+.filter-li, .filter-li-select {
     display: table-cell;
     *display: inline-block;
     padding: 6px 10px 5px 10px;
@@ -77,25 +77,20 @@
     background-color: rgba(245,245,245,1.0);
     cursor: pointer;
 }
-.filter-ul li:not(:first-of-type),
-#filter-control-ul li:not(:first-of-type)
-{
+
+.filter-li {
     border-left: solid 1px lightgray;
 }
-.filter-ul li:hover,
-#filter-control-ul li:hover,
-#btnNewSchool:hover
-{
+
+.filter-li:hover, .filter-li-select:hover, #btnNewSchool:hover {
     background-color: rgba(235,235,235,1.0);
 }
 
-.filter-ul .cls-filter-on,
-#filter-control-ul li #filteredList .cls-filter-on
-{
+.filter-ul .cls-filter-on, #filteredList.cls-filter-on {
     background-color: lightgrey;
 }
-.filter-ul .cls-filter-on:hover
-{
+
+.filter-ul .cls-filter-on:hover {
     background-color: lightgrey; /* hover停止 */
 }
 
