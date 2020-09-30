@@ -15,6 +15,13 @@ const initializeMap = () => {
     L.control.scale({'imperial': false}).addTo(map);
     L.control.locate({"keepCurrentZoomLevel": true}).addTo(map);
 
+    map.on('zoomend', () => {
+        if (CURRENT_CIRCLE) { // 円表示がある場合、zoomレベルに合わせて調整
+            CURRENT_CIRCLE.setRadius(
+                Math.floor(CURRENT_CIRCLE_RADIUS / meterPerPixel(CURRENT_CIRCLE.getLatLng()))
+            );
+        }
+    });
     return map;
 };
 
