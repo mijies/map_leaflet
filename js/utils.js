@@ -30,13 +30,13 @@ const menuListSchoolClickEvent = (li) => {
 };
 
 const menuListFilterEvent = (li) => {
-    li.addEventListener('click', _ => {
+    return () => {
         FILTER_POPUP_DIV.style.display = "block";
-    });
+    };
 };
 
 const menuListNewSchoolEvent = (li) => {
-    li.addEventListener('click', _ => {
+    return () => {
         if (li.on) {
             li.on = false; // リセット前であること
             li.classList.remove('cls-layer-on');
@@ -48,29 +48,30 @@ const menuListNewSchoolEvent = (li) => {
         FMGR.filterNewSchool();
         li.on = true; // リセットと新設園フィルター適用後であること
         li.classList.add('cls-layer-on');
-    }); 
+    };
 };
 
-const menuListBaseMapEvent = (_) => {
-    document.getElementById('selectBaseMap').addEventListener('change', e => {
+const menuSelectBaseMapEvent = (select) => {
+    select.addEventListener('change', _ => {
         for (const [key, tile] of BaseTileMap) {
             if (map.hasLayer(tile)) {
-                if (key === e.target.value) return;
+                if (key === select.value) return;
                 map.removeLayer(tile);
             }       
         }
-        map.addLayer(BaseTileMap.get(e.target.value));
+        map.addLayer(BaseTileMap.get(select.value));
     });
 };
 
-const menuListStationEvent = (li) => {
-    document.getElementById('selectStation').addEventListener('change', e => {
-        if (CURRENT_STATION_NAME === e.target.value) return;
+const menuSelectStationEvent = (select) => {
+    select.addEventListener('change', _ => {
+        const name = select.value;
+        if (CURRENT_STATION_NAME === name) return;
         if (CURRENT_STATION) map.removeLayer(CURRENT_STATION);
-        if ('最寄駅' === e.target.value) return;
+        if ('最寄駅' === name) return;
         for (const stations of STATION_MAP.values()) {
             stations.forEach(station => {
-                if (station.name === e.target.value) {
+                if (station.name === name) {
                     const latLng = [station.lat, station.lng];
                     CURRENT_STATION_NAME = station.name;
                     CURRENT_STATION = L.marker(latLng, {zIndexOffset: 200}).addTo(map);
@@ -82,9 +83,9 @@ const menuListStationEvent = (li) => {
     });
 };
 
-const menuListCircle = (_) => {
-    document.getElementById('selectCircle').addEventListener('change', e => {
-        const radius = e.target.value;
+const menuSelectCircle = (select) => {
+    select.addEventListener('change', _ => {
+        const radius = select.value;
         if (CURRENT_CIRCLE_RADIUS === radius) return;
         if (CURRENT_CIRCLE) map.removeLayer(CURRENT_CIRCLE);
         CURRENT_CIRCLE_RADIUS = null;
@@ -112,9 +113,9 @@ EVENT_HANDLE.listElementarySchool = menuListSchoolClickEvent;
 EVENT_HANDLE.listMiddleSchool = menuListSchoolClickEvent;
 EVENT_HANDLE.listFilter = menuListFilterEvent;
 EVENT_HANDLE.listNewSchool = menuListNewSchoolEvent;
-EVENT_HANDLE.listSelectBaseMap = menuListBaseMapEvent;
-EVENT_HANDLE.listSelectStation = menuListStationEvent;
-EVENT_HANDLE.listSelectCircle = menuListCircle;
+EVENT_HANDLE.selectBaseMap = menuSelectBaseMapEvent;
+EVENT_HANDLE.selectStation = menuSelectStationEvent;
+EVENT_HANDLE.selectCircle = menuSelectCircle;
 EVENT_HANDLE.listHelp = menuListHelpEvent;
 
 

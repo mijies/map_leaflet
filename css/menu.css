@@ -48,6 +48,18 @@
     cursor: pointer;
 }
 
+.menu-select {
+    border: groove white;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    padding: 6px 0px 7px 7px;
+    font-weight: bold;
+    background-color: white;
+    cursor: pointer;
+}
+.menu-select:focus {
+    outline: none;
+}
+
 #menu-control-ul .menu-li {
     color: black;
     background-color: white;
@@ -69,19 +81,7 @@
     background-color: rgba(240,240,240,0.8);
 }
 
-.menu-select {
-    margin: 0;
-    border: 0;
-    font-weight: bold;
-    vertical-align: middle;  /* alignment adjustment */
-    background-color: rgba(225, 255, 255, 0.0);
-    padding-bottom: 4px;
-}
-.menu-select:focus {
-    outline: none;
-}
-
-#selectBaseMap {
+/* #selectBaseMap {
     width: 50px;
 }
 #selectStation {
@@ -89,7 +89,7 @@
 }
 #selectCircle {
     width: 65px;
-}
+} */
 
 #listHelp {
     padding-bottom: 5px;

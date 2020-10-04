@@ -39,12 +39,12 @@ const initializeMenu = () => {
         FILTER_POPUP_DIV.style.display ="none";
     });
 
-    Array.from(document.getElementById('menu-facility-ul').children, li => {
+    Array.from(document.getElementsByClassName('menu-li'), li => {
         li.addEventListener('click', EVENT_HANDLE[li.id](li));
     });
-    
-    Array.from(document.getElementById('menu-control-ul').children, li => {
-        EVENT_HANDLE[li.id](li);
+
+    Array.from(document.getElementsByClassName('menu-select'), sl => {
+        EVENT_HANDLE[sl.id](sl);
     });
     
     addSelectBoxOptions('selectBaseMap', Array.from(BaseTileMap.keys(), key => {
