@@ -17,7 +17,7 @@ const INIT_ZOOM_LEVEL = 13;
 let RESIZE_TIMER; // Windowサイズの変更
 
 let MENU_COLLAPSED = false;
-let MENU_LIST; // menu-divの全てのli要素
+const MENU_LIST = Array.from(document.getElementsByClassName("menu-li")); // menu-divの全てのli要素
 
 let NURSERY_FACILITIES;
 
@@ -53,7 +53,7 @@ const SCHOOL_LAYERS = {
     listMiddleSchool: null    // L.layerGroup([MiddleSchool, MiddleSchool_loc])
 };
 
-let STATION_MAP;
+const STATION_MAP = new Map();
 let CURRENT_STATION_NAME = ""; // 最寄駅で選択されている駅名
 let CURRENT_STATION = null;  // 最寄駅で選択されているMarkerオブジェクト
 
@@ -63,9 +63,9 @@ let CURRENT_CIRCLE = null;   // 円表示で選択されているMarkerオブジ
 const EVENT_HANDLE = {};
 
 const FILTER_HANDLE = {};
-let FILTER_POPUP_DIV;
-let FILTER_POPUP_UL;
-let FILTER_POPUP_SELECT;
+const FILTER_POPUP_DIV = document.getElementById('filter-popup-div');
+const FILTER_POPUP_UL = document.getElementsByClassName('filter-ul');
+const FILTER_POPUP_SELECT = FILTER_POPUP_DIV.querySelectorAll("select");
 
 const OPEN_TIME_START = 7;
 const OPEN_TIME_END = 10;

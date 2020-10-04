@@ -229,4 +229,3 @@ const addFilterSelectTimeOptions = (() => {
         addSelectBoxOptions(select.id, CloseTimeList);
     };
 })();
-

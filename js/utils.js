@@ -1,4 +1,3 @@
-
 const menuListFacilityClickEvent = (li) => {
     li.on = true;
     return () => {

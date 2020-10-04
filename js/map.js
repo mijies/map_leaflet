@@ -1,4 +1,3 @@
-
 const initializeMap = () => {
     const map = L.map('mapid', {
         // Map State Options
@@ -110,14 +109,8 @@ const nurseryStyleFunction = (type) => {
 const nurseryOnEachFeature = (feature, layer) => {
     layer.bindPopup(
         getNurseryPopupHtml(feature),
-        getNurseryPopupOptions()
+        () => { return {'maxWidth': '500'}; } // 500でよいか見直し
     );
-};
-
-const getNurseryPopupOptions = () => {
-    return {
-        'maxWidth': '500'
-    };
 };
 
 const isPropTrue = (prop) => {
